@@ -4,11 +4,11 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>إدارة نظام الكوفي</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:#f4f6f8;color:#17202a}.wrap{max-width:760px;margin:auto;padding:24px}.card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 8px 30px #00000012;margin:16px 0}h1{font-size:25px;margin:0 0 7px}.muted{color:#6b7280;font-size:14px}.row{display:flex;align-items:center;justify-content:space-between;gap:14px}.badge{padding:7px 12px;border-radius:999px;font-weight:700;font-size:13px}.on{background:#dcfce7;color:#166534}.off{background:#fee2e2;color:#991b1b}button,input{font:inherit}button{border:0;border-radius:13px;padding:12px 16px;font-weight:700;cursor:pointer}.primary{background:#111827;color:#fff}.danger{background:#fee2e2;color:#991b1b}.success{background:#dcfce7;color:#166534}.login input{width:100%;padding:13px;border:1px solid #d1d5db;border-radius:12px;margin:6px 0 10px}.hidden{display:none}.top{display:flex;justify-content:space-between;align-items:center}.cafe{border:1px solid #e5e7eb;border-radius:16px;padding:16px;margin-top:14px}.err{color:#b91c1c;font-size:14px;margin-top:8px}.small{font-size:12px;color:#9ca3af;margin-top:18px}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:#f4f6f8;color:#17202a}.wrap{max-width:760px;margin:auto;padding:24px}.card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 8px 30px #00000012;margin:16px 0}h1{font-size:25px;margin:0 0 7px}.muted{color:#6b7280;font-size:14px}.row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.badge{padding:7px 12px;border-radius:999px;font-weight:700;font-size:13px}.on{background:#dcfce7;color:#166534}.off{background:#fee2e2;color:#991b1b}button,input{font:inherit}button{border:0;border-radius:13px;padding:12px 16px;font-weight:700;cursor:pointer}.primary{background:#111827;color:#fff}.danger{background:#fee2e2;color:#991b1b}.success{background:#dcfce7;color:#166534}.secondary{background:#eef2ff;color:#3730a3}.login input,.field input{width:100%;padding:13px;border:1px solid #d1d5db;border-radius:12px;margin:6px 0 10px}.hidden{display:none}.top{display:flex;justify-content:space-between;align-items:center}.cafe{border:1px solid #e5e7eb;border-radius:16px;padding:16px;margin-top:14px}.err{color:#b91c1c;font-size:14px;margin-top:8px}.ok{color:#166534;font-size:13px;margin-top:8px}.small{font-size:12px;color:#9ca3af;margin-top:18px}.field{margin-top:15px;padding-top:14px;border-top:1px solid #eef0f2}.field label{font-size:13px;color:#6b7280;font-weight:700}
 </style>
 </head>
 <body><main class="wrap">
-<div class="top"><div><h1>لوحة مالك النظام</h1><div class="muted">تفعيل وإيقاف أنظمة الكوفيات</div></div><button id="logout" class="danger hidden">خروج</button></div>
+<div class="top"><div><h1>لوحة مالك النظام</h1><div class="muted">تفعيل وإيقاف وإدارة الكوفيات</div></div><button id="logout" class="danger hidden">خروج</button></div>
 <section id="login" class="card login"><h2>دخول المالك</h2><input id="email" type="email" placeholder="البريد الإلكتروني"><input id="password" type="password" placeholder="كلمة المرور"><button id="signin" class="primary">تسجيل الدخول</button><div id="loginErr" class="err"></div></section>
 <section id="panel" class="card hidden"><div class="row"><div><b>الكوفيات المرتبطة</b><div class="muted">أي تغيير يتم حفظه مباشرة في Firebase</div></div></div><div id="cafes"></div><div id="dataErr" class="err"></div></section>
 <div class="small">Coffee Counter • Owner Control</div>
@@ -17,20 +17,15 @@
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
 import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
 import {getDatabase,ref,onValue,update} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js';
-const firebaseConfig={
- apiKey:'AIzaSyBtXll7UcG6PrpQBZwRnewxgR9UmyqEp_s',
- authDomain:'coffee-counter-eb907.firebaseapp.com',
- databaseURL:'https://coffee-counter-eb907-default-rtdb.europe-west1.firebasedatabase.app',
- projectId:'coffee-counter-eb907',
- storageBucket:'coffee-counter-eb907.firebasestorage.app',
- messagingSenderId:'730169265694',
- appId:'1:730169265694:web:0172883b33e95e44d4a80f'
-};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app);
-const $=id=>document.getElementById(id);
-$('signin').onclick=async()=>{ $('loginErr').textContent=''; try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(e){$('loginErr').textContent='تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور.'}};
+const firebaseConfig={apiKey:'AIzaSyBtXll7UcG6PrpQBZwRnewxgR9UmyqEp_s',authDomain:'coffee-counter-eb907.firebaseapp.com',databaseURL:'https://coffee-counter-eb907-default-rtdb.europe-west1.firebasedatabase.app',projectId:'coffee-counter-eb907',storageBucket:'coffee-counter-eb907.firebasestorage.app',messagingSenderId:'730169265694',appId:'1:730169265694:web:0172883b33e95e44d4a80f'};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app);const $=id=>document.getElementById(id);
+$('signin').onclick=async()=>{$('loginErr').textContent='';try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(e){$('loginErr').textContent='تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور.'}};
 $('logout').onclick=()=>signOut(auth);
-onAuthStateChanged(auth,user=>{ $('login').classList.toggle('hidden',!!user);$('panel').classList.toggle('hidden',!user);$('logout').classList.toggle('hidden',!user);if(user) loadCafes();});
-function loadCafes(){onValue(ref(db,'cafes'),snap=>{const data=snap.val()||{};$('cafes').innerHTML='';Object.entries(data).forEach(([id,c])=>{const active=c.active===true;const el=document.createElement('div');el.className='cafe';el.innerHTML=`<div class="row"><div><b>${escapeHtml(c.name||id)}</b><div class="muted">${id}</div></div><span class="badge ${active?'on':'off'}">${active?'مفعّل':'متوقف'}</span></div><div style="margin-top:14px"><button class="${active?'danger':'success'}">${active?'إيقاف النظام':'تفعيل النظام'}</button></div>`;el.querySelector('button').onclick=()=>update(ref(db,'cafes/'+id),{active:!active});$('cafes').appendChild(el)});if(!Object.keys(data).length)$('cafes').innerHTML='<div class="muted" style="margin-top:16px">لا توجد كوفيات بعد.</div>'},e=>$('dataErr').textContent='لا توجد صلاحية لقراءة البيانات. سنضبط قواعد Firebase للمالك.');}
-function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+onAuthStateChanged(auth,user=>{$('login').classList.toggle('hidden',!!user);$('panel').classList.toggle('hidden',!user);$('logout').classList.toggle('hidden',!user);if(user)loadCafes();});
+function loadCafes(){onValue(ref(db,'cafes'),snap=>{const data=snap.val()||{};$('cafes').innerHTML='';Object.entries(data).forEach(([id,c])=>{const active=c.active===true;const managerName=c.managerName||(id==='cafe001'?'حسين فالح':'');const el=document.createElement('div');el.className='cafe';el.innerHTML=`<div class="row"><div><b>${escapeHtml(c.name||id)}</b><div class="muted">${id}</div></div><span class="badge ${active?'on':'off'}">${active?'مفعّل':'متوقف'}</span></div><div class="field"><label>مدير الكوفي</label><input class="managerName" value="${escapeAttr(managerName)}" placeholder="اسم المدير"><button class="saveManager secondary">حفظ اسم المدير</button><div class="ok status"></div></div><div style="margin-top:14px"><button class="toggle ${active?'danger':'success'}">${active?'إيقاف النظام':'تفعيل النظام'}</button></div>`;
+const toggle=el.querySelector('.toggle');toggle.onclick=()=>update(ref(db,'cafes/'+id),{active:!active});
+const input=el.querySelector('.managerName'),status=el.querySelector('.status');el.querySelector('.saveManager').onclick=async()=>{const v=input.value.trim();if(!v)return;await update(ref(db,'cafes/'+id),{managerName:v});status.textContent='تم حفظ اسم المدير ✓';setTimeout(()=>status.textContent='',1800)};
+$('cafes').appendChild(el);if(id==='cafe001'&&!c.managerName)update(ref(db,'cafes/'+id),{managerName:'حسين فالح'});
+});if(!Object.keys(data).length)$('cafes').innerHTML='<div class="muted" style="margin-top:16px">لا توجد كوفيات بعد.</div>'},e=>$('dataErr').textContent='لا توجد صلاحية لقراءة البيانات.');}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}function escapeAttr(s){return escapeHtml(s)}
 </script></body></html>
