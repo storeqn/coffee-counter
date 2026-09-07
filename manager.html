@@ -2,26 +2,31 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="كوفي السلام">
+<meta name="theme-color" content="#f3f5f7">
 <title>إدارة كوفي السلام</title>
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260907-4">
-<link rel="icon" href="favicon.ico?v=20260907-4">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=20260907-6">
+<link rel="icon" href="./favicon.ico?v=20260907-6">
+<link rel="manifest" href="./manager-manifest.json?v=20260907-6">
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:#f3f5f7;color:#17202a}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:#f3f5f7;color:#17202a;touch-action:manipulation}
 .wrap{max-width:980px;margin:auto;padding:12px 12px 30px}
 .topbar{position:sticky;top:0;z-index:20;background:#f3f5f7eF;backdrop-filter:blur(14px);padding:8px 0 10px}
 .head{display:flex;align-items:center;justify-content:space-between;gap:10px}
 h1{margin:0;font-size:24px}.muted{color:#6b7280;font-size:13px}.hidden{display:none!important}
-button,input{font:inherit}button{border:0;border-radius:12px;padding:11px 13px;font-weight:800;cursor:pointer}.primary{background:#111827;color:#fff}.danger{background:#fee2e2;color:#991b1b}.success{background:#dcfce7;color:#166534}.secondary{background:#eef2ff;color:#3730a3}.orangeBtn{background:#fff7ed;color:#9a3412}
+button,input{font:inherit;font-size:16px}button{border:0;border-radius:12px;padding:11px 13px;font-weight:800;cursor:pointer}.primary{background:#111827;color:#fff}.danger{background:#fee2e2;color:#991b1b}.success{background:#dcfce7;color:#166534}.secondary{background:#eef2ff;color:#3730a3}.orangeBtn{background:#fff7ed;color:#9a3412}
 .nav{display:flex;gap:7px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{white-space:nowrap;text-decoration:none;color:#111827;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:9px 12px;font-size:13px;font-weight:800}
 .card{background:#fff;border-radius:20px;padding:16px;box-shadow:0 7px 24px #0000000d;margin:12px 0;scroll-margin-top:120px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.sectionTitle{font-size:18px;font-weight:900}.pill{padding:6px 10px;border-radius:999px;background:#f3f4f6;font-size:12px;font-weight:800}
 .login input,.field{width:100%;padding:13px;border:1px solid #d1d5db;border-radius:12px;background:#fff}.login input{margin:10px 0}.err{color:#b91c1c;font-size:14px;margin-top:8px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.stat{background:#f8fafc;border:1px solid #eef2f7;border-radius:15px;padding:11px;text-align:center}.stat span{font-size:12px;color:#6b7280}.stat b{display:block;font-size:19px;margin-top:4px}.green{color:#166534}.orange{color:#9a3412}.red{color:#991b1b}.blue{color:#3730a3}
 #sales{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.saleCard{border:1px solid #e5e7eb;border-radius:18px;padding:9px;background:#fff}.saleImg,.noImg{width:100%;aspect-ratio:1.35;border-radius:14px;background:#f3f4f6}.saleImg{object-fit:cover;display:block}.noImg{display:flex;align-items:center;justify-content:center;font-size:40px}.saleName{font-size:17px;font-weight:900;margin-top:8px}.price{font-size:12px;color:#6b7280;margin-top:2px}.countGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}.countBox{text-align:center;border-radius:10px;padding:7px 2px;background:#f8fafc;font-size:11px}.countBox b{display:block;font-size:17px;margin-top:2px}.paidBox{background:#f0fdf4;color:#166534}.remainBox{background:#fff7ed;color:#9a3412}.cancelBox{background:#fef2f2;color:#991b1b}.actionBtns{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}.actionBtns button{padding:11px 2px;font-size:12px}.btnPaid{background:#16a34a;color:#fff}.btnGift{background:#4f46e5;color:#fff}.btnCancel{background:#dc2626;color:#fff}.mistakeBtn{width:100%;margin-top:6px;background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;padding:9px}button:disabled{opacity:.35;cursor:not-allowed}
 .reportWrap{overflow-x:auto;margin-top:10px}.reportTable{width:100%;border-collapse:collapse;min-width:760px}.reportTable th,.reportTable td{padding:9px 7px;text-align:center;border-bottom:1px solid #eef2f7;font-size:12px}.reportTable th{background:#f8fafc;font-weight:900}.reportTable td:first-child,.reportTable th:first-child{text-align:right;font-weight:900}
-.form{display:grid;grid-template-columns:2fr 1fr 2fr auto;gap:8px;margin-top:12px}.form input,.purchaseForm input{min-width:0;border:1px solid #d1d5db;border-radius:12px;padding:11px;background:#fff}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.product{border:1px solid #e5e7eb;border-radius:16px;padding:10px}.product img{width:100%;aspect-ratio:1.5;object-fit:cover;border-radius:12px;background:#f3f4f6}.pname{font-weight:900;margin-top:7px}
+.form{display:grid;grid-template-columns:2fr 1fr 2fr auto;gap:8px;margin-top:12px}.form input,.purchaseForm input{min-width:0;border:1px solid #d1d5db;border-radius:12px;padding:11px;background:#fff;font-size:16px}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.product{border:1px solid #e5e7eb;border-radius:16px;padding:10px}.product img{width:100%;aspect-ratio:1.5;object-fit:cover;border-radius:12px;background:#f3f4f6}.pname{font-weight:900;margin-top:7px}
 .purchaseForm{display:grid;grid-template-columns:1fr 1.4fr 1fr auto;gap:8px;margin-top:12px}.purchaseList{display:grid;gap:8px;margin-top:12px}.purchaseItem{border:1px solid #e5e7eb;border-radius:14px;padding:11px;display:flex;justify-content:space-between;gap:10px;align-items:center}.purchaseMain{min-width:0}.purchaseMain b{display:block}.purchaseMeta{font-size:12px;color:#6b7280;margin-top:3px}.purchaseAmount{font-weight:900;color:#991b1b;white-space:nowrap}.purchaseActions{display:flex;align-items:center;gap:7px}
 .deviceBox{margin-top:10px;padding:13px;border-radius:15px;background:#f8fafc;border:1px solid #eef2f7}.deviceReq{border-top:1px solid #eef0f2;padding:10px 0}.small{font-size:12px;color:#9ca3af;margin-top:16px}
 @media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.products{grid-template-columns:repeat(2,1fr)}.form,.purchaseForm{grid-template-columns:1fr 1fr}.form input:nth-child(3),.purchaseForm input:nth-child(2){grid-column:1/-1}.form button,.purchaseForm button{grid-column:1/-1}.purchaseItem{align-items:flex-start}.purchaseActions{flex-direction:column;align-items:flex-end}}
@@ -48,103 +53,48 @@ button,input{font:inherit}button{border:0;border-radius:12px;padding:11px 13px;f
 </section>
 
 <section id="panel" class="hidden">
-
-<div id="movements" class="card">
-  <div class="row"><div><div class="sectionTitle">حركات اليوم</div><div class="muted">كل منتج يظهر مرة واحدة، والضغط يعالج قطعة واحدة فقط</div></div><span id="movementDate" class="pill"></span></div>
-  <div id="sales"></div>
-</div>
-
-<div id="purchases" class="card">
-  <div class="row"><div><div class="sectionTitle">المشتريات والمصاريف</div><div class="muted">سجّل أي مبلغ يُؤخذ من دخل الكوفي لشراء حاجة</div></div><span id="purchaseTotalBadge" class="pill">0 د.ع</span></div>
-  <div class="purchaseForm">
-    <input id="purchasePerson" placeholder="اسم الشخص">
-    <input id="purchaseItem" placeholder="ما الذي تم شراؤه؟">
-    <input id="purchaseAmount" inputmode="numeric" placeholder="المبلغ">
-    <button id="addPurchase" class="primary">تسجيل</button>
-  </div>
-  <div id="purchaseList" class="purchaseList"></div>
-</div>
-
-<div class="card">
-  <div class="row"><div><div class="sectionTitle">تقرير المنتجات</div><div class="muted">تفاصيل حركة كل منتج في اليوم المحدد</div></div><span id="reportLabel" class="pill"></span></div>
-  <div class="reportWrap"><table class="reportTable"><thead><tr><th>المنتج</th><th>النازل</th><th>الواصل</th><th>الباقي</th><th>الضيافة</th><th>الملغي</th><th>إجمالي النازل</th><th>المبلغ الواصل</th><th>قيمة الباقي</th></tr></thead><tbody id="productReport"></tbody></table></div>
-</div>
-
-<div id="daily" class="card">
-  <div class="row"><div><div class="sectionTitle">التقرير اليومي</div><div class="muted">اختر اليوم المطلوب، وتشمل الأرقام المشتريات</div></div><input id="reportDate" class="field" style="width:auto" type="date"></div>
-  <div class="grid">
-    <div class="stat"><span>النازل</span><b id="downCount">0</b></div>
-    <div class="stat"><span>الواصل</span><b id="paidCount" class="green">0</b></div>
-    <div class="stat"><span>الباقي</span><b id="remainCount" class="orange">0</b></div>
-    <div class="stat"><span>المبلغ الواصل</span><b id="paidMoney" class="green">0 د.ع</b></div>
-    <div class="stat"><span>قيمة الباقي</span><b id="remainMoney" class="orange">0 د.ع</b></div>
-    <div class="stat"><span>الضيافة</span><b id="giftCount">0</b></div>
-    <div class="stat"><span>الملغي</span><b id="cancelCount" class="red">0</b></div>
-    <div class="stat"><span>إجمالي النازل</span><b id="downMoney">0 د.ع</b></div>
-    <div class="stat"><span>المشتريات</span><b id="purchaseMoney" class="red">0 د.ع</b></div>
-    <div class="stat"><span>الصافي بعد المشتريات</span><b id="netMoney" class="blue">0 د.ع</b></div>
-  </div>
-</div>
-
-<div id="productsCard" class="card">
-  <div class="sectionTitle">إدارة المنتجات</div><div class="muted">إضافة وتعديل منتجات الكوفي</div>
-  <div class="form"><input id="pname" placeholder="اسم المنتج"><input id="pprice" inputmode="numeric" placeholder="السعر"><input id="pimage" placeholder="رابط الصورة"><button id="addProduct" class="primary">إضافة</button></div>
-  <div id="products" class="products"></div>
-</div>
-
-<div id="deviceCard" class="card">
-  <div class="row"><div><div class="sectionTitle">جهاز الموظفين</div><div class="muted">يسمح بجهاز واحد معتمد</div></div><span id="deviceState" class="pill">جارٍ التحقق...</span></div>
-  <div id="approvedDevice" class="deviceBox"></div><div id="deviceRequests"></div>
-</div>
+<div id="movements" class="card"><div class="row"><div><div class="sectionTitle">حركات اليوم</div><div class="muted">كل منتج يظهر مرة واحدة، والضغط يعالج قطعة واحدة فقط</div></div><span id="movementDate" class="pill"></span></div><div id="sales"></div></div>
+<div id="purchases" class="card"><div class="row"><div><div class="sectionTitle">المشتريات والمصاريف</div><div class="muted">سجّل أي مبلغ يُؤخذ من دخل الكوفي لشراء حاجة</div></div><span id="purchaseTotalBadge" class="pill">0 د.ع</span></div><div class="purchaseForm"><input id="purchasePerson" placeholder="اسم الشخص"><input id="purchaseItem" placeholder="ما الذي تم شراؤه؟"><input id="purchaseAmount" inputmode="numeric" placeholder="المبلغ"><button id="addPurchase" class="primary">تسجيل</button></div><div id="purchaseList" class="purchaseList"></div></div>
+<div class="card"><div class="row"><div><div class="sectionTitle">تقرير المنتجات</div><div class="muted">تفاصيل حركة كل منتج في اليوم المحدد</div></div><span id="reportLabel" class="pill"></span></div><div class="reportWrap"><table class="reportTable"><thead><tr><th>المنتج</th><th>النازل</th><th>الواصل</th><th>الباقي</th><th>الضيافة</th><th>الملغي</th><th>إجمالي النازل</th><th>المبلغ الواصل</th><th>قيمة الباقي</th></tr></thead><tbody id="productReport"></tbody></table></div></div>
+<div id="daily" class="card"><div class="row"><div><div class="sectionTitle">التقرير اليومي</div><div class="muted">اختر اليوم المطلوب، وتشمل الأرقام المشتريات</div></div><input id="reportDate" class="field" style="width:auto" type="date"></div><div class="grid"><div class="stat"><span>النازل</span><b id="downCount">0</b></div><div class="stat"><span>الواصل</span><b id="paidCount" class="green">0</b></div><div class="stat"><span>الباقي</span><b id="remainCount" class="orange">0</b></div><div class="stat"><span>المبلغ الواصل</span><b id="paidMoney" class="green">0 د.ع</b></div><div class="stat"><span>قيمة الباقي</span><b id="remainMoney" class="orange">0 د.ع</b></div><div class="stat"><span>الضيافة</span><b id="giftCount">0</b></div><div class="stat"><span>الملغي</span><b id="cancelCount" class="red">0</b></div><div class="stat"><span>إجمالي النازل</span><b id="downMoney">0 د.ع</b></div><div class="stat"><span>المشتريات</span><b id="purchaseMoney" class="red">0 د.ع</b></div><div class="stat"><span>الصافي بعد المشتريات</span><b id="netMoney" class="blue">0 د.ع</b></div></div></div>
+<div id="productsCard" class="card"><div class="sectionTitle">إدارة المنتجات</div><div class="muted">إضافة وتعديل منتجات الكوفي</div><div class="form"><input id="pname" placeholder="اسم المنتج"><input id="pprice" inputmode="numeric" placeholder="السعر"><input id="pimage" placeholder="رابط الصورة"><button id="addProduct" class="primary">إضافة</button></div><div id="products" class="products"></div></div>
+<div id="deviceCard" class="card"><div class="row"><div><div class="sectionTitle">جهاز الموظفين</div><div class="muted">يسمح بجهاز واحد معتمد</div></div><span id="deviceState" class="pill">جارٍ التحقق...</span></div><div id="approvedDevice" class="deviceBox"></div><div id="deviceRequests"></div></div>
 </section>
 <div class="small">Coffee Counter • Manager</div>
 </main>
-
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
 import {getAuth,signInAnonymously,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
 import {getDatabase,ref,get,set,onValue,push,update,remove} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js';
-
 const config={apiKey:'AIzaSyBtXll7UcG6PrpQBZwRnewxgR9UmyqEp_s',authDomain:'coffee-counter-eb907.firebaseapp.com',databaseURL:'https://coffee-counter-eb907-default-rtdb.europe-west1.firebasedatabase.app',projectId:'coffee-counter-eb907',storageBucket:'coffee-counter-eb907.firebasestorage.app',messagingSenderId:'730169265694',appId:'1:730169265694:web:0172883b33e95e44d4a80f'};
 const app=initializeApp(config),auth=getAuth(app),db=getDatabase(app),$=id=>document.getElementById(id);
 let cafeId=null,salesCache={},productsCache={},purchasesCache={},approvedDevice=null,stopSales=null,stopPurchases=null;
 const dayKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const selectedDay=()=>$('reportDate').value||dayKey();
 $('reportDate').value=dayKey();
-function updateDate(){ $('reportLabel').textContent=selectedDay(); $('movementDate').textContent=selectedDay(); }
-updateDate();
+function updateDate(){$('reportLabel').textContent=selectedDay();$('movementDate').textContent=selectedDay();}updateDate();
 $('reportDate').onchange=()=>{updateDate();if(cafeId){listenSales();listenPurchases();}};
-
-$('enter').onclick=async()=>{const code=$('code').value.trim();$('err').textContent='';if(!/^\d{6}$/.test(code)){ $('err').textContent='أدخل رمزًا من 6 أرقام.';return }try{if(!auth.currentUser)await signInAnonymously(auth);const access=(await get(ref(db,'accessCodes/'+code))).val();if(!access||access.active!==true||access.role!=='manager')throw new Error('bad');cafeId=access.cafeId;await set(ref(db,'sessions/'+auth.currentUser.uid),{code,cafeId,role:'manager',createdAt:Date.now()});const cafe=(await get(ref(db,'cafes/'+cafeId))).val();if(!cafe||cafe.active!==true)throw new Error('inactive');sessionStorage.setItem('managerCode',code);openPanel(cafe)}catch(e){$('err').textContent=e.message==='inactive'?'النظام موقوف من مالك النظام.':'رمز الدخول غير صحيح أو غير مفعل.'}};
+$('enter').onclick=async()=>{const code=$('code').value.trim();$('err').textContent='';if(!/^\d{6}$/.test(code)){$('err').textContent='أدخل رمزًا من 6 أرقام.';return}try{if(!auth.currentUser)await signInAnonymously(auth);const access=(await get(ref(db,'accessCodes/'+code))).val();if(!access||access.active!==true||access.role!=='manager')throw new Error('bad');cafeId=access.cafeId;await set(ref(db,'sessions/'+auth.currentUser.uid),{code,cafeId,role:'manager',createdAt:Date.now()});const cafe=(await get(ref(db,'cafes/'+cafeId))).val();if(!cafe||cafe.active!==true)throw new Error('inactive');sessionStorage.setItem('managerCode',code);openPanel(cafe)}catch(e){$('err').textContent=e.message==='inactive'?'النظام موقوف من مالك النظام.':'رمز الدخول غير صحيح أو غير مفعل.'}};
 function openPanel(cafe){$('login').classList.add('hidden');$('panel').classList.remove('hidden');$('logout').classList.remove('hidden');$('nav').classList.remove('hidden');$('cafeTitle').textContent=(cafe.name||'الكوفي')+(cafe.managerName?' • '+cafe.managerName:'');listenProducts();listenSales();listenPurchases();listenDevice();}
 $('logout').onclick=async()=>{sessionStorage.removeItem('managerCode');if(stopSales)stopSales();if(stopPurchases)stopPurchases();await signOut(auth);location.reload()};
-
 function listenProducts(){onValue(ref(db,`cafes/${cafeId}/products`),s=>{productsCache=s.val()||{};renderProducts(productsCache);renderSales(salesCache);});}
 function renderProducts(data){const box=$('products');box.innerHTML='';Object.entries(data).forEach(([id,p])=>{const el=document.createElement('div');el.className='product';el.innerHTML=`${p.image?`<img src="${escAttr(p.image)}" onerror="this.style.display='none'">`:''}<div class="pname">${esc(p.name||'منتج')}</div><div class="muted">${money(p.price)}</div><div style="display:flex;gap:6px;margin-top:8px"><button class="secondary edit">تعديل</button><button class="danger del">حذف</button></div>`;el.querySelector('.edit').onclick=async()=>{const name=prompt('اسم المنتج',p.name||'');if(name===null)return;const price=prompt('السعر',p.price||0);if(price===null)return;const image=prompt('رابط الصورة',p.image||'');if(image===null)return;await update(ref(db,`cafes/${cafeId}/products/${id}`),{name:name.trim(),price:Number(price)||0,image:image.trim()})};el.querySelector('.del').onclick=()=>{if(confirm('حذف المنتج؟'))remove(ref(db,`cafes/${cafeId}/products/${id}`))};box.appendChild(el)});if(!Object.keys(data).length)box.innerHTML='<div class="muted">لا توجد منتجات.</div>'}
 $('addProduct').onclick=async()=>{const name=$('pname').value.trim(),price=Number($('pprice').value),image=$('pimage').value.trim();if(!name||!price){alert('اكتب اسم المنتج والسعر.');return}await push(ref(db,`cafes/${cafeId}/products`),{name,price,image,active:true,createdAt:Date.now()});$('pname').value='';$('pprice').value='';$('pimage').value=''};
-
 function listenSales(){if(stopSales){stopSales();stopSales=null}stopSales=onValue(ref(db,`cafes/${cafeId}/sales/${selectedDay()}`),s=>{salesCache=s.val()||{};renderSales(salesCache);renderSummary();renderProductReport(salesCache)});}
 function groupSales(data){const groups={};Object.entries(data).forEach(([saleId,s])=>{const key=s.productId||('name_'+(s.productName||'منتج'));if(!groups[key])groups[key]={key,productId:s.productId||'',name:s.productName||'منتج',price:Number(s.price)||0,sales:[],pending:[],paid:[],gift:[],cancelled:[]};const g=groups[key];g.sales.push({id:saleId,...s});const status=s.status||'pending';if(status==='paid')g.paid.push({id:saleId,...s});else if(status==='gift')g.gift.push({id:saleId,...s});else if(status==='cancelled')g.cancelled.push({id:saleId,...s});else g.pending.push({id:saleId,...s})});return groups;}
 function renderSales(data){const box=$('sales');box.innerHTML='';const groups=Object.values(groupSales(data));groups.sort((a,b)=>Math.max(...b.sales.map(x=>x.createdAt||0))-Math.max(...a.sales.map(x=>x.createdAt||0)));if(!groups.length){box.innerHTML='<div class="muted" style="grid-column:1/-1">لا توجد حركات في هذا اليوم.</div>';return}groups.forEach(g=>{const product=productsCache[g.productId]||{},image=product.image||g.sales.find(x=>x.productImage)?.productImage||'',down=g.pending.length+g.paid.length+g.gift.length,remain=g.pending.length,paid=g.paid.length,gift=g.gift.length,cancelled=g.cancelled.length;const el=document.createElement('div');el.className='saleCard';el.innerHTML=`${image?`<img class="saleImg" src="${escAttr(image)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="noImg" style="display:none">☕</div>`:`<div class="noImg">☕</div>`}<div class="saleName">${esc(g.name)}</div><div class="price">${money(g.price)}</div><div class="countGrid"><div class="countBox">النازل<b>${down}</b></div><div class="countBox paidBox">الواصل<b>${paid}</b></div><div class="countBox remainBox">الباقي<b>${remain}</b></div><div class="countBox">الضيافة<b>${gift}</b></div><div class="countBox cancelBox">الملغي<b>${cancelled}</b></div></div><div class="actionBtns"><button class="btnPaid" ${remain===0?'disabled':''}>✓ واصل</button><button class="btnGift" ${remain===0?'disabled':''}>★ ضيافة</button><button class="btnCancel" ${remain===0?'disabled':''}>✕ ملغي</button></div><button class="mistakeBtn" ${remain===0?'disabled':''}>↩ خطأ موظف</button>`;el.querySelector('.btnPaid').onclick=()=>changeOnePending(g,'paid');el.querySelector('.btnGift').onclick=()=>changeOnePending(g,'gift');el.querySelector('.btnCancel').onclick=()=>changeOnePending(g,'cancelled');el.querySelector('.mistakeBtn').onclick=()=>deleteMistake(g);box.appendChild(el)});}
 async function changeOnePending(group,status){const pending=[...group.pending].sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));if(!pending.length)return;const sale=pending[0];await update(ref(db,`cafes/${cafeId}/sales/${selectedDay()}/${sale.id}`),{status,updatedAt:Date.now()});}
 async function deleteMistake(group){const pending=[...group.pending].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));if(!pending.length)return;if(!confirm(`حذف طلب واحد من "${group.name}" لأنه نزل بالخطأ؟`))return;await remove(ref(db,`cafes/${cafeId}/sales/${selectedDay()}/${pending[0].id}`));}
-
 function listenPurchases(){if(stopPurchases){stopPurchases();stopPurchases=null}stopPurchases=onValue(ref(db,`cafes/${cafeId}/purchases/${selectedDay()}`),s=>{purchasesCache=s.val()||{};renderPurchases();renderSummary()});}
 $('addPurchase').onclick=async()=>{const person=$('purchasePerson').value.trim(),item=$('purchaseItem').value.trim(),amount=Number($('purchaseAmount').value);if(!person||!item||!amount){alert('اكتب اسم الشخص، الشيء الذي تم شراؤه، والمبلغ.');return}await push(ref(db,`cafes/${cafeId}/purchases/${selectedDay()}`),{person,item,amount,createdAt:Date.now()});$('purchasePerson').value='';$('purchaseItem').value='';$('purchaseAmount').value=''};
 function renderPurchases(){const box=$('purchaseList');box.innerHTML='';const entries=Object.entries(purchasesCache).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));let total=0;entries.forEach(([id,p])=>{total+=Number(p.amount)||0;const el=document.createElement('div');el.className='purchaseItem';el.innerHTML=`<div class="purchaseMain"><b>${esc(p.item||'مشتريات')}</b><div class="purchaseMeta">بواسطة: ${esc(p.person||'-')} • ${timeText(p.createdAt)}</div></div><div class="purchaseActions"><span class="purchaseAmount">-${money(p.amount)}</span><button class="danger">حذف</button></div>`;el.querySelector('button').onclick=()=>{if(confirm('حذف هذا السجل؟'))remove(ref(db,`cafes/${cafeId}/purchases/${selectedDay()}/${id}`))};box.appendChild(el)});$('purchaseTotalBadge').textContent=money(total);if(!entries.length)box.innerHTML='<div class="muted">لا توجد مشتريات مسجلة في هذا اليوم.</div>';}
-
 function renderSummary(){let down=0,paid=0,gift=0,cancel=0,downMoney=0,paidMoney=0,remainMoney=0;Object.values(salesCache).forEach(x=>{const price=Number(x.price)||0,status=x.status||'pending';if(status==='cancelled'){cancel++;return}down++;downMoney+=price;if(status==='paid'){paid++;paidMoney+=price}else if(status==='gift'){gift++}else remainMoney+=price});const remain=Math.max(0,down-paid-gift);const purchaseMoney=Object.values(purchasesCache).reduce((a,p)=>a+(Number(p.amount)||0),0);$('downCount').textContent=down;$('paidCount').textContent=paid;$('remainCount').textContent=remain;$('giftCount').textContent=gift;$('cancelCount').textContent=cancel;$('downMoney').textContent=money(downMoney);$('paidMoney').textContent=money(paidMoney);$('remainMoney').textContent=money(remainMoney);$('purchaseMoney').textContent=money(purchaseMoney);$('netMoney').textContent=money(paidMoney-purchaseMoney);}
 function renderProductReport(data){const box=$('productReport');box.innerHTML='';const groups=Object.values(groupSales(data));if(!groups.length){box.innerHTML='<tr><td colspan="9" class="muted">لا توجد حركات.</td></tr>';return}groups.forEach(g=>{const down=g.pending.length+g.paid.length+g.gift.length,price=Number(g.price)||0,paid=g.paid.length,remain=g.pending.length,gift=g.gift.length,cancel=g.cancelled.length;const tr=document.createElement('tr');tr.innerHTML=`<td>${esc(g.name)}</td><td>${down}</td><td class="green">${paid}</td><td class="orange">${remain}</td><td>${gift}</td><td class="red">${cancel}</td><td>${money(down*price)}</td><td class="green">${money(paid*price)}</td><td class="orange">${money(remain*price)}</td>`;box.appendChild(tr)});}
-
 function listenDevice(){onValue(ref(db,`cafes/${cafeId}/staffDevice`),s=>{approvedDevice=s.val()||null;renderApprovedDevice()});onValue(ref(db,`cafes/${cafeId}/deviceRequests`),s=>renderDeviceRequests(s.val()||{}));}
 function renderApprovedDevice(){const box=$('approvedDevice');if(approvedDevice?.uid){$('deviceState').textContent='جهاز معتمد';box.innerHTML='<div class="row"><div><b>الجهاز الحالي</b><div class="muted">تم اعتماد جهاز الموظفين</div></div><button id="revokeDevice" class="danger">إلغاء الجهاز</button></div>';$('revokeDevice').onclick=async()=>{if(confirm('إلغاء اعتماد الجهاز؟'))await remove(ref(db,`cafes/${cafeId}/staffDevice`))}}else{$('deviceState').textContent='لا يوجد جهاز';box.innerHTML='<div class="muted">افتح واجهة الموظفين من الجهاز المطلوب وأدخل رمز الموظفين.</div>'}}
 function renderDeviceRequests(data){const box=$('deviceRequests');box.innerHTML='';const arr=Object.entries(data).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));if(!arr.length){box.innerHTML='<div class="muted" style="margin-top:10px">لا توجد طلبات اعتماد جديدة.</div>';return}arr.forEach(([uid,r])=>{const el=document.createElement('div');el.className='deviceReq';el.innerHTML=`<div class="row"><div><b>طلب جهاز جديد</b><div class="muted">${esc(r.label||'هاتف الموظفين')}</div></div><div><button class="success approve">اعتماد</button> <button class="danger reject">رفض</button></div></div>`;el.querySelector('.approve').onclick=async()=>{if(approvedDevice?.uid&&!confirm('استبدال الجهاز الحالي؟'))return;await set(ref(db,`cafes/${cafeId}/staffDevice`),{uid,approvedAt:Date.now(),label:r.label||'هاتف الموظفين'});for(const [id] of arr)await remove(ref(db,`cafes/${cafeId}/deviceRequests/${id}`))};el.querySelector('.reject').onclick=()=>remove(ref(db,`cafes/${cafeId}/deviceRequests/${uid}`));box.appendChild(el)});}
-
 onAuthStateChanged(auth,async user=>{const code=sessionStorage.getItem('managerCode');if(!user||!code)return;try{const access=(await get(ref(db,'accessCodes/'+code))).val();if(!access||access.role!=='manager'||!access.active)return;cafeId=access.cafeId;await set(ref(db,'sessions/'+user.uid),{code,cafeId,role:'manager',createdAt:Date.now()});const cafe=(await get(ref(db,'cafes/'+cafeId))).val();if(cafe?.active)openPanel(cafe)}catch(e){}});
-function money(n){return (Number(n)||0).toLocaleString('ar-IQ')+' د.ع'}
-function timeText(ts){if(!ts)return '';const d=new Date(ts);return d.toLocaleTimeString('ar-IQ',{hour:'2-digit',minute:'2-digit'})}
-function esc(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-function escAttr(s){return esc(s)}
+function money(n){return (Number(n)||0).toLocaleString('ar-IQ')+' د.ع'}function timeText(ts){if(!ts)return '';const d=new Date(ts);return d.toLocaleTimeString('ar-IQ',{hour:'2-digit',minute:'2-digit'})}function esc(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}function escAttr(s){return esc(s)}
 </script>
 </body>
 </html>
