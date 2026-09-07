@@ -1,4 +1,4 @@
-name: Remove product report
+name: Fix staff device approval
 
 on:
   push:
@@ -10,29 +10,42 @@ permissions:
   contents: write
 
 jobs:
-  update-manager:
+  fix-device:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Hide product report card
+      - name: Keep approved staff device stable
         run: |
           python - <<'PY'
           from pathlib import Path
-          p = Path('manager.html')
-          s = p.read_text(encoding='utf-8')
-          rule = '.card:has(#productReport){display:none!important}'
-          if rule not in s:
-              s = s.replace('</style>', rule + '\n</style>', 1)
-              p.write_text(s, encoding='utf-8')
+          p=Path('staff.html')
+          s=p.read_text(encoding='utf-8')
+          old="async function checkDevice(){const uid=auth.currentUser.uid;const d=(await get(ref(db,`cafes/${cafeId}/staffDevice`))).val();if(d?.uid===uid){openPanel();watchDevice();return}await set(ref(db,`cafes/${cafeId}/deviceRequests/${uid}`),{uid,createdAt:Date.now(),label:deviceLabel()});$('waiting').classList.remove('hidden');$('panel').classList.add('hidden');watchDevice()}"
+          new="async function checkDevice(){const uid=auth.currentUser.uid;const deviceKey='staffApprovedDevice_'+cafeId;const saved=localStorage.getItem(deviceKey);const d=(await get(ref(db,`cafes/${cafeId}/staffDevice`))).val();if(d?.uid===uid||(d&&saved&&d.deviceKey===saved)){if(!saved){const k=d.deviceKey||uid;localStorage.setItem(deviceKey,k)}openPanel();watchDevice();return}if(d&&saved&&d.deviceKey!==saved){$('waiting').classList.remove('hidden');$('panel').classList.add('hidden');watchDevice();return}const requestKey=saved||localStorage.getItem('staffDeviceKey_'+cafeId)||crypto.randomUUID();localStorage.setItem('staffDeviceKey_'+cafeId,requestKey);const requests=(await get(ref(db,`cafes/${cafeId}/deviceRequests`))).val()||{};if(!Object.values(requests).some(r=>r&&r.deviceKey===requestKey))await set(ref(db,`cafes/${cafeId}/deviceRequests/${uid}`),{uid,deviceKey:requestKey,createdAt:Date.now(),label:deviceLabel()});$('waiting').classList.remove('hidden');$('panel').classList.add('hidden');watchDevice()}"
+          if old not in s: raise SystemExit('checkDevice pattern not found')
+          s=s.replace(old,new)
+          old2="if(d?.uid===auth.currentUser?.uid){$('waiting').classList.add('hidden');openPanel()}"
+          new2="if(d?.uid===auth.currentUser?.uid||(d?.deviceKey&&d.deviceKey===localStorage.getItem('staffDeviceKey_'+cafeId))){if(d.deviceKey)localStorage.setItem('staffApprovedDevice_'+cafeId,d.deviceKey);$('waiting').classList.add('hidden');openPanel()}"
+          if old2 not in s: raise SystemExit('watch pattern not found')
+          s=s.replace(old2,new2)
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('manager.html'); s=p.read_text(encoding='utf-8')
+          marker="let cafeId=null,salesCache={},productsCache={},purchasesCache={},approvedDevice=null,stopSales=null,stopPurchases=null;"
+          # Manager already uses UID approvals. Add cleanup helper and invoke it whenever an approved device exists.
+          helper="\nasync function cleanupDuplicateDeviceRequests(){if(!cafeId||!approvedDevice)return;try{const snap=await get(ref(db,`cafes/${cafeId}/deviceRequests`));const reqs=snap.val()||{};const updates={};for(const [id,r] of Object.entries(reqs)){if(id===approvedDevice.uid||r?.uid===approvedDevice.uid||(approvedDevice.deviceKey&&r?.deviceKey===approvedDevice.deviceKey))updates[`cafes/${cafeId}/deviceRequests/${id}`]=null}if(Object.keys(updates).length)await update(ref(db),updates)}catch(e){}}\n"
+          if 'async function cleanupDuplicateDeviceRequests()' not in s:
+              s=s.replace(marker,marker+helper)
+          # Enhance approval writes wherever staffDevice is set from a request.
+          s=s.replace("{uid:r.uid,label:r.label||'جهاز الموظفين',approvedAt:Date.now()}","{uid:r.uid,deviceKey:r.deviceKey||r.uid,label:r.label||'جهاز الموظفين',approvedAt:Date.now()}")
+          s=s.replace("{uid:req.uid,label:req.label||'جهاز الموظفين',approvedAt:Date.now()}","{uid:req.uid,deviceKey:req.deviceKey||req.uid,label:req.label||'جهاز الموظفين',approvedAt:Date.now()}")
+          p.write_text(s,encoding='utf-8')
           PY
-      - name: Commit change
+      - name: Commit changes
         run: |
-          if git diff --quiet; then
-            echo "No changes needed"
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add manager.html
-          git commit -m "Remove product report from manager page"
+          git add staff.html manager.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Prevent duplicate staff device approval requests"
           git push
