@@ -1,8 +1,8 @@
 {
-  "id": "/coffee-counter/staff-pro.html",
+  "id": "/coffee-counter/staff.html",
   "name": "كوفي السلام - الموظفين",
   "short_name": "موظفو السلام",
-  "start_url": "/coffee-counter/staff-pro.html?v=20260907-staffpro2",
+  "start_url": "/coffee-counter/staff.html?v=20260908-staff2",
   "scope": "/coffee-counter/",
   "display": "standalone",
   "background_color": "#f4f6f8",
