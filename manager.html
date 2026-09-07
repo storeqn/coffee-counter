@@ -70,6 +70,8 @@ import {getDatabase,ref,get,set,onValue,push,update,remove} from 'https://www.gs
 const config={apiKey:'AIzaSyBtXll7UcG6PrpQBZwRnewxgR9UmyqEp_s',authDomain:'coffee-counter-eb907.firebaseapp.com',databaseURL:'https://coffee-counter-eb907-default-rtdb.europe-west1.firebasedatabase.app',projectId:'coffee-counter-eb907',storageBucket:'coffee-counter-eb907.firebasestorage.app',messagingSenderId:'730169265694',appId:'1:730169265694:web:0172883b33e95e44d4a80f'};
 const app=initializeApp(config),auth=getAuth(app),db=getDatabase(app),$=id=>document.getElementById(id);
 let cafeId=null,salesCache={},productsCache={},purchasesCache={},approvedDevice=null,stopSales=null,stopPurchases=null;
+async function cleanupDuplicateDeviceRequests(){if(!cafeId||!approvedDevice)return;try{const snap=await get(ref(db,`cafes/${cafeId}/deviceRequests`));const reqs=snap.val()||{};const updates={};for(const [id,r] of Object.entries(reqs)){if(id===approvedDevice.uid||r?.uid===approvedDevice.uid||(approvedDevice.deviceKey&&r?.deviceKey===approvedDevice.deviceKey))updates[`cafes/${cafeId}/deviceRequests/${id}`]=null}if(Object.keys(updates).length)await update(ref(db),updates)}catch(e){}}
+
 const dayKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const selectedDay=()=>$('reportDate').value||dayKey();
 $('reportDate').value=dayKey();
