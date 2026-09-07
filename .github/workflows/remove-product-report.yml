@@ -1,0 +1,38 @@
+name: Remove product report
+
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-product-report.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-manager:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hide product report card
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('manager.html')
+          s = p.read_text(encoding='utf-8')
+          rule = '.card:has(#productReport){display:none!important}'
+          if rule not in s:
+              s = s.replace('</style>', rule + '\n</style>', 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit change
+        run: |
+          if git diff --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manager.html
+          git commit -m "Remove product report from manager page"
+          git push
