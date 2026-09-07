@@ -1,0 +1,17 @@
+{
+  "name": "كوفي السلام - الإدارة",
+  "short_name": "كوفي السلام",
+  "start_url": "./manager.html?v=20260907-6",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f5f7",
+  "theme_color": "#f3f5f7",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png?v=20260907-6",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
