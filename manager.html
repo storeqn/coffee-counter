@@ -13,17 +13,18 @@ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;
 background:#f4f6f8;
 color:#17202a
 }
-.wrap{max-width:920px;margin:auto;padding:18px}
+.wrap{max-width:920px;margin:auto;padding:14px}
 .card{
 background:#fff;
 border-radius:20px;
-padding:18px;
+padding:16px;
 box-shadow:0 8px 30px #00000010;
 margin:14px 0
 }
-h1,h2{margin:0}
+h1{margin:0}
 .muted{color:#6b7280;font-size:13px}
 .hidden{display:none}
+
 .top,.row{
 display:flex;
 align-items:center;
@@ -31,7 +32,9 @@ justify-content:space-between;
 gap:10px;
 flex-wrap:wrap
 }
+
 button,input{font:inherit}
+
 button{
 border:0;
 border-radius:12px;
@@ -39,6 +42,12 @@ padding:11px 14px;
 font-weight:800;
 cursor:pointer
 }
+
+button:disabled{
+opacity:.35;
+cursor:not-allowed
+}
+
 .primary{background:#111827;color:#fff}
 .danger{background:#fee2e2;color:#991b1b}
 .success{background:#dcfce7;color:#166534}
@@ -49,6 +58,7 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:9px
 }
+
 .stat{
 background:#f8fafc;
 border:1px solid #eef2f7;
@@ -56,6 +66,7 @@ border-radius:16px;
 padding:13px;
 text-align:center
 }
+
 .stat b{
 display:block;
 font-size:20px;
@@ -66,43 +77,6 @@ margin-top:4px
 .orange{color:#9a3412}
 .red{color:#991b1b}
 
-.form{
-display:grid;
-grid-template-columns:2fr 1fr 2fr auto;
-gap:8px;
-margin-top:12px
-}
-.form input,.dateInput{
-min-width:0;
-border:1px solid #d1d5db;
-border-radius:12px;
-padding:11px;
-background:#fff
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:12px
-}
-.product{
-border:1px solid #e5e7eb;
-border-radius:16px;
-padding:12px
-}
-.product img{
-width:100%;
-aspect-ratio:1.6;
-object-fit:cover;
-border-radius:12px;
-background:#f3f4f6
-}
-.pname{
-font-weight:900;
-margin-top:8px
-}
-
 .login input{
 width:100%;
 padding:14px;
@@ -110,8 +84,9 @@ border:1px solid #d1d5db;
 border-radius:13px;
 margin:10px 0
 }
+
 .err{color:#b91c1c;font-size:14px;margin-top:8px}
-.small{font-size:12px;color:#9ca3af;margin:18px 0}
+
 .pill{
 padding:6px 10px;
 border-radius:999px;
@@ -120,6 +95,209 @@ font-size:12px;
 font-weight:800
 }
 
+.dateInput{
+border:1px solid #d1d5db;
+border-radius:12px;
+padding:10px;
+background:#fff
+}
+
+/* بطاقات المنتجات في الحركات */
+
+#sales{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+margin-top:14px
+}
+
+.saleCard{
+border:2px solid #e5e7eb;
+border-radius:20px;
+padding:9px;
+background:#fff;
+overflow:hidden
+}
+
+.saleImg{
+width:100%;
+aspect-ratio:1.3;
+object-fit:cover;
+border-radius:15px;
+background:#f3f4f6;
+display:block
+}
+
+.noImg{
+width:100%;
+aspect-ratio:1.3;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:15px;
+background:#f3f4f6;
+font-size:42px
+}
+
+.saleName{
+font-size:18px;
+font-weight:900;
+margin-top:9px
+}
+
+.price{
+color:#6b7280;
+font-size:13px;
+margin-top:3px
+}
+
+.countGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:5px;
+margin-top:9px
+}
+
+.countBox{
+text-align:center;
+border-radius:10px;
+padding:7px 2px;
+background:#f8fafc;
+font-size:11px
+}
+
+.countBox b{
+display:block;
+font-size:18px;
+margin-top:2px
+}
+
+.remainBox{
+background:#fff7ed;
+color:#9a3412
+}
+
+.paidBox{
+background:#f0fdf4;
+color:#166534
+}
+
+.cancelBox{
+background:#fef2f2;
+color:#991b1b
+}
+
+.actionBtns{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:6px;
+margin-top:10px
+}
+
+.actionBtns button{
+padding:13px 3px;
+font-size:13px
+}
+
+.btnPaid{
+background:#16a34a;
+color:#fff
+}
+
+.btnGift{
+background:#4f46e5;
+color:#fff
+}
+
+.btnCancel{
+background:#dc2626;
+color:#fff
+}
+
+.mistakeBtn{
+display:block;
+width:100%;
+margin-top:7px;
+background:#fff7ed;
+color:#9a3412;
+border:1px solid #fed7aa;
+padding:10px
+}
+
+/* إدارة المنتجات */
+
+.form{
+display:grid;
+grid-template-columns:2fr 1fr 2fr auto;
+gap:8px;
+margin-top:12px
+}
+
+.form input{
+min-width:0;
+border:1px solid #d1d5db;
+border-radius:12px;
+padding:11px
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:12px
+}
+
+.product{
+border:1px solid #e5e7eb;
+border-radius:16px;
+padding:12px
+}
+
+.product img{
+width:100%;
+aspect-ratio:1.6;
+object-fit:cover;
+border-radius:12px
+}
+
+.pname{
+font-weight:900;
+margin-top:8px
+}
+
+/* التقرير */
+
+.reportWrap{
+overflow-x:auto;
+margin-top:12px
+}
+
+.reportTable{
+width:100%;
+border-collapse:collapse;
+min-width:780px
+}
+
+.reportTable th,.reportTable td{
+padding:10px 8px;
+text-align:center;
+border-bottom:1px solid #eef2f7;
+font-size:13px
+}
+
+.reportTable th{
+background:#f8fafc;
+font-weight:900
+}
+
+.reportTable td:first-child,
+.reportTable th:first-child{
+text-align:right;
+font-weight:900
+}
+
+/* الجهاز */
+
 .deviceBox{
 margin-top:12px;
 padding:14px;
@@ -127,141 +305,16 @@ border-radius:16px;
 background:#f8fafc;
 border:1px solid #eef2f7
 }
+
 .deviceReq{
 border-top:1px solid #eef0f2;
 padding:11px 0
 }
 
-/* حركات اليوم */
-#sales{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:14px!important
-}
-
-.sale{
-border:2px solid #e5e7eb;
-border-radius:20px;
-padding:9px;
-background:#fff;
-overflow:hidden;
-transition:.15s
-}
-
-.saleImg{
-display:block;
-width:100%;
-aspect-ratio:1.25;
-object-fit:cover;
-border-radius:15px;
-background:#f3f4f6
-}
-
-.saleNoImg{
-width:100%;
-aspect-ratio:1.25;
-border-radius:15px;
-background:#f3f4f6;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:42px
-}
-
-.saleInfo{
-padding:10px 3px 3px
-}
-
-.saleName{
-font-size:17px;
-font-weight:900;
-line-height:1.3
-}
-
-.saleMeta{
-font-size:13px;
-color:#6b7280;
-margin-top:4px
-}
-
-.saleStatus{
-display:inline-block;
-margin-top:7px;
-padding:6px 10px;
-border-radius:999px;
-font-size:13px;
-font-weight:900;
-background:#fff7ed;
-color:#9a3412
-}
-
-.saleBtns{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:6px;
-margin-top:10px
-}
-
-.saleBtns button{
-padding:14px 3px;
-font-size:14px;
-font-weight:900;
-border-radius:12px;
-white-space:nowrap
-}
-
-.saleBtns .paid{
-background:#16a34a;
-color:#fff
-}
-
-.saleBtns .gift{
-background:#4f46e5;
-color:#fff
-}
-
-.saleBtns .cancel{
-background:#dc2626;
-color:#fff
-}
-
-.sale.status-paid{
-border-color:#16a34a
-}
-
-.sale.status-gift{
-border-color:#4f46e5
-}
-
-.sale.status-cancelled{
-border-color:#dc2626;
-opacity:.7
-}
-
-.reportWrap{
-overflow-x:auto;
-margin-top:12px
-}
-.reportTable{
-width:100%;
-border-collapse:collapse;
-min-width:780px
-}
-.reportTable th,.reportTable td{
-padding:10px 8px;
-text-align:center;
-border-bottom:1px solid #eef2f7;
-font-size:13px
-}
-.reportTable th{
-background:#f8fafc;
-font-weight:900
-}
-.reportTable td:first-child,
-.reportTable th:first-child{
-text-align:right;
-font-weight:900
+.small{
+font-size:12px;
+color:#9ca3af;
+margin:18px 0
 }
 
 @media(max-width:700px){
@@ -270,17 +323,11 @@ font-weight:900
 .form{grid-template-columns:1fr 1fr}
 .form input:nth-child(3){grid-column:1/-1}
 .form button{grid-column:1/-1}
-.wrap{padding:12px}
-#sales{grid-template-columns:repeat(2,1fr)}
 }
 
-@media(max-width:390px){
-#sales{grid-template-columns:repeat(2,1fr)}
-.saleBtns{grid-template-columns:1fr}
-.saleBtns button{padding:11px 4px}
-.saleName{font-size:15px}
+@media(max-width:380px){
+#sales{grid-template-columns:1fr}
 }
-
 </style>
 </head>
 
@@ -296,7 +343,6 @@ font-weight:900
 
 <button id="logout" class="danger hidden">خروج</button>
 </div>
-
 
 <section id="login" class="card login">
 
@@ -320,21 +366,19 @@ placeholder="أدخل الرمز المكوّن من 6 أرقام"
 
 <section id="panel" class="hidden">
 
-<!-- حركات اليوم -->
+<!-- المنتجات والحركات -->
 <div class="card">
 
 <div class="row">
 
 <div>
-<b>حركات اليوم المحدد</b>
+<b>حركات اليوم</b>
 <div class="muted">
-اضغط على حالة الطلب مباشرة من البطاقة
+كل منتج يظهر مرة واحدة فقط
 </div>
 </div>
 
-<button id="clearClosed" class="danger">
-حذف الملغي فقط
-</button>
+<span id="movementDate" class="pill"></span>
 
 </div>
 
@@ -350,9 +394,7 @@ placeholder="أدخل الرمز المكوّن من 6 أرقام"
 
 <div>
 <b>تقرير المنتجات</b>
-<div class="muted">
-تفاصيل حركة كل منتج في اليوم المحدد
-</div>
+<div class="muted">تقرير مفصل لكل منتج</div>
 </div>
 
 <span id="reportLabel" class="pill"></span>
@@ -370,7 +412,7 @@ placeholder="أدخل الرمز المكوّن من 6 أرقام"
 <th>الواصل</th>
 <th>الباقي</th>
 <th>الضيافة</th>
-<th>الإلغاء</th>
+<th>الملغي</th>
 <th>إجمالي النازل</th>
 <th>المبلغ الواصل</th>
 <th>قيمة الباقي</th>
@@ -393,15 +435,12 @@ placeholder="أدخل الرمز المكوّن من 6 أرقام"
 
 <div>
 <b>التقرير اليومي</b>
-<div class="muted">
-اختر اليوم الذي تريد عرض تقريره
-</div>
+<div class="muted">اختر اليوم المطلوب</div>
 </div>
 
 <input id="reportDate" class="dateInput" type="date">
 
 </div>
-
 
 <div class="grid" style="margin-top:12px">
 
@@ -436,7 +475,7 @@ placeholder="أدخل الرمز المكوّن من 6 أرقام"
 </div>
 
 <div class="stat">
-<span class="muted">الإلغاء</span>
+<span class="muted">الملغي</span>
 <b id="cancelCount" class="red">0</b>
 </div>
 
@@ -453,17 +492,11 @@ placeholder="أدخل الرمز المكوّن من 6 أرقام"
 <!-- إدارة المنتجات -->
 <div class="card">
 
-<div class="row">
-
-<div>
 <b>إدارة المنتجات</b>
+
 <div class="muted">
-أضف الاسم والسعر ورابط الصورة. تظهر مباشرة عند الموظفين.
+إضافة وتعديل منتجات الكوفي
 </div>
-</div>
-
-</div>
-
 
 <div class="form">
 
@@ -477,11 +510,11 @@ placeholder="السعر"
 
 <input
 id="pimage"
-placeholder="رابط الصورة (اختياري)"
+placeholder="رابط الصورة"
 >
 
 <button id="addProduct" class="primary">
-إضافة المنتج
+إضافة
 </button>
 
 </div>
@@ -498,11 +531,7 @@ placeholder="رابط الصورة (اختياري)"
 
 <div>
 <b>جهاز الموظفين</b>
-
-<div class="muted">
-يسمح بجهاز واحد فقط. عند تبديله ألغِ الجهاز الحالي ثم وافق على الجهاز الجديد.
-</div>
-
+<div class="muted">يسمح بجهاز واحد معتمد</div>
 </div>
 
 <span id="deviceState" class="pill">
@@ -513,12 +542,11 @@ placeholder="رابط الصورة (اختياري)"
 
 <div id="approvedDevice" class="deviceBox"></div>
 
-<div id="deviceRequests" style="margin-top:8px"></div>
+<div id="deviceRequests"></div>
 
 </div>
 
 </section>
-
 
 <div class="small">
 Coffee Counter • Manager
@@ -533,14 +561,12 @@ import {
 initializeApp
 } from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
 
-
 import {
 getAuth,
 signInAnonymously,
 onAuthStateChanged,
 signOut
 } from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
-
 
 import {
 getDatabase,
@@ -584,8 +610,6 @@ const $=id=>document.getElementById(id);
 
 let cafeId=null;
 
-let currentCafe=null;
-
 let salesCache={};
 
 let productsCache={};
@@ -606,35 +630,34 @@ String(d.getDate()).padStart(2,'0');
 };
 
 
-const selectedDay=()=>{
-
-return $('reportDate').value || dayKey();
-
-};
+const selectedDay=()=>$('reportDate').value||dayKey();
 
 
 $('reportDate').value=dayKey();
 
 
-function updateDateLabel(){
+function updateDate(){
 
-$('reportLabel').textContent=
-selectedDay();
+$('reportLabel').textContent=selectedDay();
+
+$('movementDate').textContent=selectedDay();
 
 }
 
 
-updateDateLabel();
+updateDate();
 
 
 $('reportDate').onchange=()=>{
 
-updateDateLabel();
+updateDate();
 
 if(cafeId)listenSales();
 
 };
 
+
+/* الدخول */
 
 $('enter').onclick=async()=>{
 
@@ -645,8 +668,7 @@ $('err').textContent='';
 
 if(!/^\d{6}$/.test(code)){
 
-$('err').textContent=
-'أدخل رمزًا من 6 أرقام.';
+$('err').textContent='أدخل رمزًا من 6 أرقام.';
 
 return;
 
@@ -662,11 +684,8 @@ await signInAnonymously(auth);
 }
 
 
-const access=
-(
-await get(
-ref(db,'accessCodes/'+code)
-)
+const access=(
+await get(ref(db,'accessCodes/'+code))
 ).val();
 
 
@@ -685,10 +704,7 @@ cafeId=access.cafeId;
 
 
 await set(
-ref(
-db,
-'sessions/'+auth.currentUser.uid
-),
+ref(db,'sessions/'+auth.currentUser.uid),
 {
 code,
 cafeId,
@@ -698,32 +714,19 @@ createdAt:Date.now()
 );
 
 
-const cafe=
-(
-await get(
-ref(
-db,
-'cafes/'+cafeId
-)
-)
+const cafe=(
+await get(ref(db,'cafes/'+cafeId))
 ).val();
 
 
-if(
-!cafe ||
-cafe.active!==true
-){
+if(!cafe||cafe.active!==true){
 
 throw new Error('inactive');
 
 }
 
 
-sessionStorage.setItem(
-'managerCode',
-code
-);
-
+sessionStorage.setItem('managerCode',code);
 
 openPanel(cafe);
 
@@ -731,11 +734,8 @@ openPanel(cafe);
 }catch(e){
 
 $('err').textContent=
-
 e.message==='inactive'
-
 ?'النظام موقوف من مالك النظام.'
-
 :'رمز الدخول غير صحيح أو غير مفعل.';
 
 }
@@ -743,28 +743,7 @@ e.message==='inactive'
 };
 
 
-$('logout').onclick=async()=>{
-
-sessionStorage.removeItem(
-'managerCode'
-);
-
-if(stopSales){
-
-stopSales();
-
-}
-
-await signOut(auth);
-
-location.reload();
-
-};
-
-
 function openPanel(cafe){
-
-currentCafe=cafe;
 
 $('login').classList.add('hidden');
 
@@ -774,281 +753,30 @@ $('logout').classList.remove('hidden');
 
 
 $('cafeTitle').textContent=
-
 (cafe.name||'الكوفي')+
+(cafe.managerName?' • '+cafe.managerName:'');
 
-(cafe.managerName
-?' • '+cafe.managerName
-:''
-);
-
-
-listenDevice();
 
 listenProducts();
 
 listenSales();
 
-}
-
-
-/* جهاز الموظفين */
-
-function listenDevice(){
-
-onValue(
-ref(
-db,
-`cafes/${cafeId}/staffDevice`
-),
-s=>{
-
-approvedDevice=s.val()||null;
-
-renderApprovedDevice();
-
-}
-);
-
-
-onValue(
-ref(
-db,
-`cafes/${cafeId}/deviceRequests`
-),
-s=>{
-
-renderDeviceRequests(
-s.val()||{}
-);
-
-}
-);
+listenDevice();
 
 }
 
 
-function renderApprovedDevice(){
+$('logout').onclick=async()=>{
 
-const box=$('approvedDevice');
+sessionStorage.removeItem('managerCode');
 
+if(stopSales)stopSales();
 
-if(approvedDevice?.uid){
+await signOut(auth);
 
-$('deviceState').textContent=
-'جهاز معتمد';
-
-
-box.innerHTML=`
-
-<div class="row">
-
-<div>
-
-<b>الجهاز الحالي</b>
-
-<div class="muted">
-
-تم اعتماده ${
-approvedDevice.approvedAt
-?new Date(
-approvedDevice.approvedAt
-).toLocaleString('ar-IQ')
-:''
-}
-
-</div>
-
-</div>
-
-<button
-id="revokeDevice"
-class="danger"
->
-إلغاء اعتماد الجهاز
-</button>
-
-</div>
-`;
-
-
-$('revokeDevice').onclick=async()=>{
-
-if(
-!confirm(
-'إلغاء اعتماد جهاز الموظفين الحالي؟ سيتوقف عن تسجيل الطلبات.'
-)
-)return;
-
-
-await remove(
-ref(
-db,
-`cafes/${cafeId}/staffDevice`
-)
-);
+location.reload();
 
 };
-
-
-}else{
-
-$('deviceState').textContent=
-'لا يوجد جهاز';
-
-
-box.innerHTML=`
-<div class="muted">
-افتح واجهة الموظفين من الهاتف المطلوب وأدخل رمز الموظفين، ثم سيظهر طلب الاعتماد هنا.
-</div>
-`;
-
-}
-
-}
-
-
-function renderDeviceRequests(data){
-
-const box=$('deviceRequests');
-
-box.innerHTML='';
-
-
-const arr=
-Object.entries(data)
-.sort(
-(a,b)=>
-(b[1].createdAt||0)-
-(a[1].createdAt||0)
-);
-
-
-if(!arr.length){
-
-box.innerHTML=`
-<div class="muted">
-لا توجد طلبات اعتماد جديدة.
-</div>
-`;
-
-return;
-
-}
-
-
-arr.forEach(([uid,r])=>{
-
-const el=
-document.createElement('div');
-
-el.className='deviceReq';
-
-
-el.innerHTML=`
-
-<div class="row">
-
-<div>
-
-<b>طلب جهاز جديد</b>
-
-<div class="muted">
-
-${esc(
-r.label||
-'هاتف الموظفين'
-)}
-
- •
-
-${new Date(
-r.createdAt||
-Date.now()
-).toLocaleString('ar-IQ')}
-
-</div>
-
-</div>
-
-
-<div>
-
-<button class="success approve">
-اعتماد هذا الجهاز
-</button>
-
-<button class="danger reject">
-رفض
-</button>
-
-</div>
-
-</div>
-`;
-
-
-el.querySelector(
-'.approve'
-).onclick=async()=>{
-
-
-if(
-approvedDevice?.uid &&
-!confirm(
-'يوجد جهاز معتمد حاليًا. هل تريد استبداله بهذا الجهاز؟'
-)
-)return;
-
-
-await set(
-ref(
-db,
-`cafes/${cafeId}/staffDevice`
-),
-{
-uid,
-approvedAt:Date.now(),
-label:
-r.label||
-'هاتف الموظفين'
-}
-);
-
-
-for(const [id] of arr){
-
-await remove(
-ref(
-db,
-`cafes/${cafeId}/deviceRequests/${id}`
-)
-);
-
-}
-
-};
-
-
-el.querySelector(
-'.reject'
-).onclick=()=>{
-
-remove(
-ref(
-db,
-`cafes/${cafeId}/deviceRequests/${uid}`
-)
-);
-
-};
-
-
-box.appendChild(el);
-
-});
-
-}
 
 
 /* المنتجات */
@@ -1056,23 +784,14 @@ box.appendChild(el);
 function listenProducts(){
 
 onValue(
-ref(
-db,
-`cafes/${cafeId}/products`
-),
+ref(db,`cafes/${cafeId}/products`),
 s=>{
 
-productsCache=
-s.val()||{};
+productsCache=s.val()||{};
 
-renderProducts(
-productsCache
-);
+renderProducts(productsCache);
 
-/* تحديث صور الحركات */
-renderSales(
-salesCache
-);
+renderSales(salesCache);
 
 }
 );
@@ -1087,11 +806,9 @@ const box=$('products');
 box.innerHTML='';
 
 
-Object.entries(data)
-.forEach(([id,p])=>{
+Object.entries(data).forEach(([id,p])=>{
 
-const el=
-document.createElement('div');
+const el=document.createElement('div');
 
 el.className='product';
 
@@ -1099,12 +816,7 @@ el.className='product';
 el.innerHTML=`
 
 ${p.image
-?`
-<img
-src="${escAttr(p.image)}"
-onerror="this.style.display='none'"
->
-`
+?`<img src="${escAttr(p.image)}" onerror="this.style.display='none'">`
 :''}
 
 <div class="pname">
@@ -1112,15 +824,10 @@ ${esc(p.name||'منتج')}
 </div>
 
 <div class="muted">
-${money(p.price||0)}
+${money(p.price)}
 </div>
 
-
-<div style="
-display:flex;
-gap:6px;
-margin-top:8px
-">
+<div style="display:flex;gap:6px;margin-top:8px">
 
 <button class="secondary edit">
 تعديل
@@ -1134,33 +841,20 @@ margin-top:8px
 `;
 
 
-el.querySelector(
-'.edit'
-).onclick=async()=>{
+el.querySelector('.edit').onclick=async()=>{
 
-const name=
-prompt(
-'اسم المنتج',
-p.name||''
-);
+const name=prompt('اسم المنتج',p.name||'');
 
 if(name===null)return;
 
 
-const price=
-prompt(
-'السعر',
-p.price||0
-);
+const price=prompt('السعر',p.price||0);
 
 if(price===null)return;
 
 
 await update(
-ref(
-db,
-`cafes/${cafeId}/products/${id}`
-),
+ref(db,`cafes/${cafeId}/products/${id}`),
 {
 name:name.trim(),
 price:Number(price)||0
@@ -1170,21 +864,12 @@ price:Number(price)||0
 };
 
 
-el.querySelector(
-'.del'
-).onclick=()=>{
+el.querySelector('.del').onclick=()=>{
 
-if(
-confirm(
-'حذف المنتج؟'
-)
-){
+if(confirm('حذف المنتج؟')){
 
 remove(
-ref(
-db,
-`cafes/${cafeId}/products/${id}`
-)
+ref(db,`cafes/${cafeId}/products/${id}`)
 );
 
 }
@@ -1199,11 +884,7 @@ box.appendChild(el);
 
 if(!Object.keys(data).length){
 
-box.innerHTML=`
-<div class="muted">
-لا توجد منتجات بعد.
-</div>
-`;
+box.innerHTML='<div class="muted">لا توجد منتجات.</div>';
 
 }
 
@@ -1212,23 +893,16 @@ box.innerHTML=`
 
 $('addProduct').onclick=async()=>{
 
-const name=
-$('pname').value.trim();
+const name=$('pname').value.trim();
 
-const price=
-Number(
-$('pprice').value
-);
+const price=Number($('pprice').value);
 
-const image=
-$('pimage').value.trim();
+const image=$('pimage').value.trim();
 
 
 if(!name||!price){
 
-alert(
-'اكتب اسم المنتج والسعر.'
-);
+alert('اكتب اسم المنتج والسعر.');
 
 return;
 
@@ -1236,10 +910,7 @@ return;
 
 
 await push(
-ref(
-db,
-`cafes/${cafeId}/products`
-),
+ref(db,`cafes/${cafeId}/products`),
 {
 name,
 price,
@@ -1272,35 +943,22 @@ stopSales=null;
 }
 
 
-const date=
-selectedDay();
-
-
-stopSales=
-onValue(
+stopSales=onValue(
 
 ref(
 db,
-`cafes/${cafeId}/sales/${date}`
+`cafes/${cafeId}/sales/${selectedDay()}`
 ),
 
 s=>{
 
-salesCache=
-s.val()||{};
+salesCache=s.val()||{};
 
+renderSales(salesCache);
 
-renderSales(
-salesCache
-);
+renderSummary(salesCache);
 
-renderSummary(
-salesCache
-);
-
-renderProductReport(
-salesCache
-);
+renderProductReport(salesCache);
 
 }
 
@@ -1309,38 +967,104 @@ salesCache
 }
 
 
-function findProduct(sale){
+/* تجميع الطلبات حسب المنتج */
 
-if(
-sale.productId &&
-productsCache[sale.productId]
-){
+function groupSales(data){
 
-return productsCache[
-sale.productId
-];
+const groups={};
+
+
+Object.entries(data).forEach(([saleId,s])=>{
+
+const key=
+s.productId||
+('name_'+(s.productName||'منتج'));
+
+
+if(!groups[key]){
+
+groups[key]={
+
+key,
+
+productId:s.productId||'',
+
+name:s.productName||'منتج',
+
+price:Number(s.price)||0,
+
+sales:[],
+
+pending:[],
+
+paid:[],
+
+gift:[],
+
+cancelled:[]
+
+};
 
 }
 
 
-const found=
-Object.values(
-productsCache
-).find(
-p=>
-p.name &&
-sale.productName &&
-p.name.trim()===
-sale.productName.trim()
-);
+const g=groups[key];
 
 
-return found||null;
+g.sales.push({
+id:saleId,
+...s
+});
+
+
+const status=s.status||'pending';
+
+
+if(status==='paid'){
+
+g.paid.push({
+id:saleId,
+...s
+});
+
+}
+
+else if(status==='gift'){
+
+g.gift.push({
+id:saleId,
+...s
+});
+
+}
+
+else if(status==='cancelled'){
+
+g.cancelled.push({
+id:saleId,
+...s
+});
+
+}
+
+else{
+
+g.pending.push({
+id:saleId,
+...s
+});
+
+}
+
+});
+
+
+return groups;
 
 }
 
 
-/* بطاقات الحركات */
+/* بطاقة واحدة لكل منتج */
 
 function renderSales(data){
 
@@ -1349,20 +1073,28 @@ const box=$('sales');
 box.innerHTML='';
 
 
-const arr=
-Object.entries(data)
-.sort(
-(a,b)=>
-(b[1].createdAt||0)-
-(a[1].createdAt||0)
+const groups=Object.values(groupSales(data));
+
+
+groups.sort((a,b)=>{
+
+const ta=Math.max(
+...a.sales.map(x=>x.createdAt||0)
 );
 
+const tb=Math.max(
+...b.sales.map(x=>x.createdAt||0)
+);
 
-if(!arr.length){
+return tb-ta;
+
+});
+
+
+if(!groups.length){
 
 box.innerHTML=`
-<div class="muted"
-style="grid-column:1/-1">
+<div class="muted" style="grid-column:1/-1">
 لا توجد حركات في هذا اليوم.
 </div>
 `;
@@ -1372,171 +1104,180 @@ return;
 }
 
 
-arr.forEach(([id,s])=>{
-
-const st=
-s.status||
-'pending';
-
+groups.forEach(g=>{
 
 const product=
-findProduct(s);
+productsCache[g.productId]||{};
 
 
 const image=
-product?.image||
-s.image||
+product.image||
+g.sales.find(x=>x.productImage)?.productImage||
 '';
 
 
-const label=
-
-st==='paid'
-?'واصل'
-
-:st==='gift'
-?'ضيافة'
-
-:st==='cancelled'
-?'ملغي'
-
-:'باقي';
+/*
+النازل الحقيقي:
+كل الطلبات ما عدا الطلبات التي حذفناها كـ "خطأ موظف".
+طلبات خطأ الموظف يتم حذفها نهائياً لذلك لن تظهر هنا.
+*/
+const down=
+g.pending.length+
+g.paid.length+
+g.gift.length;
 
 
-const el=
-document.createElement('div');
+const remain=g.pending.length;
+
+const paid=g.paid.length;
+
+const gift=g.gift.length;
+
+const cancelled=g.cancelled.length;
 
 
-el.className=
-'sale status-'+st;
+const el=document.createElement('div');
+
+el.className='saleCard';
 
 
-const imageHTML=
-image
-
+const imageHtml=image
 ?`
 <img
 class="saleImg"
 src="${escAttr(image)}"
-alt="${escAttr(
-s.productName||
-'منتج'
-)}"
 onerror="
 this.style.display='none';
-this.nextElementSibling.style.display='flex'
+this.nextElementSibling.style.display='flex';
 "
 >
-<div
-class="saleNoImg"
-style="display:none"
->
-☕
-</div>
+<div class="noImg" style="display:none">☕</div>
 `
-
 :`
-<div class="saleNoImg">
-☕
-</div>
+<div class="noImg">☕</div>
 `;
 
 
 el.innerHTML=`
 
-${imageHTML}
-
-
-<div class="saleInfo">
+${imageHtml}
 
 <div class="saleName">
-${esc(
-s.productName||
-product?.name||
-'منتج'
-)}
+${esc(g.name)}
+</div>
+
+<div class="price">
+${money(g.price)}
 </div>
 
 
-<div class="saleMeta">
+<div class="countGrid">
 
-${money(
-s.price||0
-)}
+<div class="countBox">
+النازل
+<b>${down}</b>
+</div>
 
- •
+<div class="countBox paidBox">
+الواصل
+<b>${paid}</b>
+</div>
 
-${new Date(
-s.createdAt||
-Date.now()
-).toLocaleTimeString(
-'ar-IQ',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
-)}
+<div class="countBox remainBox">
+الباقي
+<b>${remain}</b>
+</div>
+
+<div class="countBox">
+الضيافة
+<b>${gift}</b>
+</div>
+
+<div class="countBox cancelBox">
+الملغي
+<b>${cancelled}</b>
+</div>
 
 </div>
 
 
-<span class="saleStatus">
-${label}
-</span>
+<div class="actionBtns">
 
-</div>
-
-
-<div class="saleBtns">
-
-<button class="paid">
+<button
+class="btnPaid"
+${remain===0?'disabled':''}
+>
 ✓ واصل
 </button>
 
-<button class="gift">
+<button
+class="btnGift"
+${remain===0?'disabled':''}
+>
 ★ ضيافة
 </button>
 
-<button class="cancel">
+<button
+class="btnCancel"
+${remain===0?'disabled':''}
+>
 ✕ ملغي
 </button>
 
 </div>
+
+
+<button
+class="mistakeBtn"
+${remain===0?'disabled':''}
+>
+↩ خطأ موظف — حذف واحدة من النازل
+</button>
+
 `;
 
 
-el.querySelector(
-'.paid'
-).onclick=()=>{
+/* واصل */
 
-setSaleStatus(
-id,
+el.querySelector('.btnPaid').onclick=()=>{
+
+changeOnePending(
+g,
 'paid'
 );
 
 };
 
 
-el.querySelector(
-'.gift'
-).onclick=()=>{
+/* ضيافة */
 
-setSaleStatus(
-id,
+el.querySelector('.btnGift').onclick=()=>{
+
+changeOnePending(
+g,
 'gift'
 );
 
 };
 
 
-el.querySelector(
-'.cancel'
-).onclick=()=>{
+/* ملغي */
 
-setSaleStatus(
-id,
+el.querySelector('.btnCancel').onclick=()=>{
+
+changeOnePending(
+g,
 'cancelled'
 );
+
+};
+
+
+/* خطأ الموظف */
+
+el.querySelector('.mistakeBtn').onclick=()=>{
+
+deleteMistake(g);
 
 };
 
@@ -1548,22 +1289,95 @@ box.appendChild(el);
 }
 
 
-function setSaleStatus(
-id,
-status
-){
+/*
+يختار طلباً واحداً فقط من الطلبات الباقية.
+نختار الأقدم أولاً.
+*/
 
-return update(
+async function changeOnePending(group,status){
+
+const pending=[...group.pending]
+.sort(
+(a,b)=>
+(a.createdAt||0)-
+(b.createdAt||0)
+);
+
+
+if(!pending.length){
+
+alert('لا يوجد عدد باقي لهذا المنتج.');
+
+return;
+
+}
+
+
+const sale=pending[0];
+
+
+await update(
 
 ref(
 db,
-`cafes/${cafeId}/sales/${selectedDay()}/${id}`
+`cafes/${cafeId}/sales/${selectedDay()}/${sale.id}`
 ),
 
 {
 status,
 updatedAt:Date.now()
 }
+
+);
+
+}
+
+
+/*
+خطأ موظف:
+يحذف آخر طلب باقي سجله الموظف.
+ولا يُحتسب كملغي.
+*/
+
+async function deleteMistake(group){
+
+const pending=[...group.pending]
+.sort(
+(a,b)=>
+(b.createdAt||0)-
+(a.createdAt||0)
+);
+
+
+if(!pending.length){
+
+alert('لا يوجد طلب باقي يمكن تصحيحه.');
+
+return;
+
+}
+
+
+if(
+!confirm(
+`هل تريد حذف طلب واحد من "${group.name}" لأنه نزل بالخطأ؟`
+)
+){
+
+return;
+
+}
+
+
+const sale=pending[0];
+
+
+await remove(
+
+ref(
+db,
+`cafes/${cafeId}/sales/${selectedDay()}/${sale.id}`
+)
 
 );
 
@@ -1589,18 +1403,14 @@ let paidMoney=0;
 let remainMoney=0;
 
 
-Object.values(data)
-.forEach(x=>{
+Object.values(data).forEach(x=>{
 
-const price=
-Number(
-x.price
-)||0;
+const price=Number(x.price)||0;
+
+const status=x.status||'pending';
 
 
-if(
-x.status==='cancelled'
-){
+if(status==='cancelled'){
 
 cancel++;
 
@@ -1614,9 +1424,7 @@ down++;
 downMoney+=price;
 
 
-if(
-x.status==='paid'
-){
+if(status==='paid'){
 
 paid++;
 
@@ -1624,9 +1432,7 @@ paidMoney+=price;
 
 }
 
-else if(
-x.status==='gift'
-){
+else if(status==='gift'){
 
 gift++;
 
@@ -1648,154 +1454,44 @@ down-paid-gift
 );
 
 
-$('downCount').textContent=
-down;
+$('downCount').textContent=down;
 
-$('paidCount').textContent=
-paid;
+$('paidCount').textContent=paid;
 
-$('remainCount').textContent=
-remain;
+$('remainCount').textContent=remain;
 
-$('giftCount').textContent=
-gift;
+$('giftCount').textContent=gift;
 
-$('cancelCount').textContent=
-cancel;
+$('cancelCount').textContent=cancel;
 
-$('downMoney').textContent=
-money(downMoney);
+$('downMoney').textContent=money(downMoney);
 
-$('paidMoney').textContent=
-money(paidMoney);
+$('paidMoney').textContent=money(paidMoney);
 
-$('remainMoney').textContent=
-money(remainMoney);
+$('remainMoney').textContent=money(remainMoney);
 
 }
 
 
-/* تقرير المنتجات */
+/* تقرير كل منتج */
 
 function renderProductReport(data){
 
-const box=
-$('productReport');
+const box=$('productReport');
 
 box.innerHTML='';
 
 
-const groups={};
+const groups=
+Object.values(groupSales(data));
 
 
-Object.values(data)
-.forEach(s=>{
-
-const key=
-s.productId||
-s.productName||
-'unknown';
-
-
-if(!groups[key]){
-
-groups[key]={
-
-name:
-s.productName||
-'منتج',
-
-down:0,
-
-paid:0,
-
-remain:0,
-
-gift:0,
-
-cancel:0,
-
-downMoney:0,
-
-paidMoney:0,
-
-remainMoney:0
-
-};
-
-}
-
-
-const g=
-groups[key];
-
-
-const price=
-Number(
-s.price
-)||0;
-
-
-if(
-s.status==='cancelled'
-){
-
-g.cancel++;
-
-return;
-
-}
-
-
-g.down++;
-
-g.downMoney+=price;
-
-
-if(
-s.status==='paid'
-){
-
-g.paid++;
-
-g.paidMoney+=price;
-
-}
-
-else if(
-s.status==='gift'
-){
-
-g.gift++;
-
-}
-
-else{
-
-g.remain++;
-
-g.remainMoney+=price;
-
-}
-
-});
-
-
-const arr=
-Object.values(groups)
-.sort(
-(a,b)=>
-b.downMoney-
-a.downMoney
-);
-
-
-if(!arr.length){
+if(!groups.length){
 
 box.innerHTML=`
 <tr>
 <td colspan="9" class="muted">
-لا توجد حركات في هذا اليوم.
+لا توجد حركات.
 </td>
 </tr>
 `;
@@ -1805,55 +1501,60 @@ return;
 }
 
 
-arr.forEach(g=>{
+groups.forEach(g=>{
 
-const tr=
-document.createElement('tr');
+const down=
+g.pending.length+
+g.paid.length+
+g.gift.length;
+
+
+const price=Number(g.price)||0;
+
+const paid=g.paid.length;
+
+const remain=g.pending.length;
+
+const gift=g.gift.length;
+
+const cancel=g.cancelled.length;
+
+
+const tr=document.createElement('tr');
 
 
 tr.innerHTML=`
 
-<td>
-${esc(g.name)}
-</td>
+<td>${esc(g.name)}</td>
 
-<td>
-${g.down}
-</td>
+<td>${down}</td>
 
 <td class="green">
-${g.paid}
+${paid}
 </td>
 
 <td class="orange">
-${g.remain}
+${remain}
 </td>
 
-<td>
-${g.gift}
-</td>
+<td>${gift}</td>
 
 <td class="red">
-${g.cancel}
+${cancel}
 </td>
 
 <td>
-${money(
-g.downMoney
-)}
+${money(down*price)}
 </td>
 
 <td class="green">
-${money(
-g.paidMoney
-)}
+${money(paid*price)}
 </td>
 
 <td class="orange">
-${money(
-g.remainMoney
-)}
+${money(remain*price)}
 </td>
+
 `;
 
 
@@ -1864,89 +1565,261 @@ box.appendChild(tr);
 }
 
 
-/* حذف الملغي */
+/* جهاز الموظفين */
 
-$('clearClosed').onclick=async()=>{
+function listenDevice(){
 
-if(
-!confirm(
-'حذف الحركات الملغاة فقط من اليوم المحدد؟'
-)
-)return;
+onValue(
+ref(db,`cafes/${cafeId}/staffDevice`),
+s=>{
+
+approvedDevice=s.val()||null;
+
+renderApprovedDevice();
+
+}
+);
 
 
-for(
-const [id,s]
-of Object.entries(
-salesCache
-)
-){
+onValue(
+ref(db,`cafes/${cafeId}/deviceRequests`),
+s=>{
 
-if(
-s.status==='cancelled'
-){
-
-await remove(
-
-ref(
-db,
-`cafes/${cafeId}/sales/${selectedDay()}/${id}`
-)
-
+renderDeviceRequests(
+s.val()||{}
 );
 
 }
+);
+
+}
+
+
+function renderApprovedDevice(){
+
+const box=$('approvedDevice');
+
+
+if(approvedDevice?.uid){
+
+$('deviceState').textContent='جهاز معتمد';
+
+
+box.innerHTML=`
+
+<div class="row">
+
+<div>
+
+<b>الجهاز الحالي</b>
+
+<div class="muted">
+تم اعتماد جهاز الموظفين
+</div>
+
+</div>
+
+<button
+id="revokeDevice"
+class="danger"
+>
+إلغاء الجهاز
+</button>
+
+</div>
+`;
+
+
+$('revokeDevice').onclick=async()=>{
+
+if(!confirm('إلغاء اعتماد الجهاز؟'))return;
+
+
+await remove(
+ref(
+db,
+`cafes/${cafeId}/staffDevice`
+)
+);
+
+};
+
+
+}else{
+
+$('deviceState').textContent='لا يوجد جهاز';
+
+
+box.innerHTML=`
+<div class="muted">
+افتح واجهة الموظفين من الجهاز المطلوب وأدخل رمز الموظفين.
+</div>
+`;
+
+}
+
+}
+
+
+function renderDeviceRequests(data){
+
+const box=$('deviceRequests');
+
+box.innerHTML='';
+
+
+const arr=Object.entries(data)
+.sort(
+(a,b)=>
+(b[1].createdAt||0)-
+(a[1].createdAt||0)
+);
+
+
+if(!arr.length){
+
+box.innerHTML=`
+<div class="muted" style="margin-top:10px">
+لا توجد طلبات اعتماد جديدة.
+</div>
+`;
+
+return;
+
+}
+
+
+arr.forEach(([uid,r])=>{
+
+const el=document.createElement('div');
+
+el.className='deviceReq';
+
+
+el.innerHTML=`
+
+<div class="row">
+
+<div>
+
+<b>طلب جهاز جديد</b>
+
+<div class="muted">
+${esc(r.label||'هاتف الموظفين')}
+</div>
+
+</div>
+
+
+<div>
+
+<button class="success approve">
+اعتماد
+</button>
+
+<button class="danger reject">
+رفض
+</button>
+
+</div>
+
+</div>
+`;
+
+
+el.querySelector('.approve').onclick=async()=>{
+
+if(
+approvedDevice?.uid &&
+!confirm('استبدال الجهاز الحالي؟')
+){
+
+return;
+
+}
+
+
+await set(
+ref(db,`cafes/${cafeId}/staffDevice`),
+{
+uid,
+approvedAt:Date.now(),
+label:r.label||'هاتف الموظفين'
+}
+);
+
+
+for(const [id] of arr){
+
+await remove(
+ref(
+db,
+`cafes/${cafeId}/deviceRequests/${id}`
+)
+);
 
 }
 
 };
 
 
-/* استعادة الجلسة */
+el.querySelector('.reject').onclick=()=>{
+
+remove(
+ref(
+db,
+`cafes/${cafeId}/deviceRequests/${uid}`
+)
+);
+
+};
+
+
+box.appendChild(el);
+
+});
+
+}
+
+
+/* استعادة جلسة المدير */
 
 onAuthStateChanged(
 auth,
 async user=>{
 
 const code=
-sessionStorage.getItem(
-'managerCode'
-);
+sessionStorage.getItem('managerCode');
 
 
-if(
-user &&
-code
-){
+if(!user||!code)return;
+
 
 try{
 
-const a=
-(
+const access=(
 await get(
-ref(
-db,
-'accessCodes/'+code
-)
+ref(db,'accessCodes/'+code)
 )
 ).val();
 
 
 if(
-a &&
-a.role==='manager' &&
-a.active
+!access ||
+access.role!=='manager' ||
+!access.active
 ){
 
-cafeId=
-a.cafeId;
+return;
+
+}
+
+
+cafeId=access.cafeId;
 
 
 await set(
-ref(
-db,
-'sessions/'+user.uid
-),
+ref(db,'sessions/'+user.uid),
 {
 code,
 cafeId,
@@ -1956,30 +1829,20 @@ createdAt:Date.now()
 );
 
 
-const c=
-(
+const cafe=(
 await get(
-ref(
-db,
-'cafes/'+cafeId
-)
+ref(db,'cafes/'+cafeId)
 )
 ).val();
 
 
-if(
-c?.active
-){
+if(cafe?.active){
 
-openPanel(c);
-
-}
+openPanel(cafe);
 
 }
 
 }catch(e){}
-
-}
 
 }
 );
@@ -1991,30 +1854,21 @@ function money(n){
 
 return (
 Number(n)||0
-).toLocaleString(
-'ar-IQ'
-)+' د.ع';
+).toLocaleString('ar-IQ')+' د.ع';
 
 }
 
 
 function esc(s){
 
-return String(s)
-.replace(
+return String(s).replace(
 /[&<>'"]/g,
 c=>({
-
 '&':'&amp;',
-
 '<':'&lt;',
-
 '>':'&gt;',
-
 "'":'&#39;',
-
 '"':'&quot;'
-
 }[c])
 );
 
