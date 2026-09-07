@@ -1,13 +1,14 @@
 {
+  "id": "/coffee-counter/staff-pro.html",
   "name": "كوفي السلام - الموظفين",
   "short_name": "موظفو السلام",
-  "start_url": "./staff.html?v=20260907-staff1",
-  "scope": "./",
+  "start_url": "/coffee-counter/staff-pro.html?v=20260907-staffpro2",
+  "scope": "/coffee-counter/",
   "display": "standalone",
   "background_color": "#f4f6f8",
   "theme_color": "#f4f6f8",
   "icons": [
-    {"src":"coffee-icon-192.png?v=20260907-staff1","sizes":"192x192","type":"image/png","purpose":"any"},
-    {"src":"coffee-icon-512.png?v=20260907-staff1","sizes":"512x512","type":"image/png","purpose":"any"}
+    {"src":"/coffee-counter/coffee-icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"/coffee-counter/coffee-icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}
   ]
 }
