@@ -1,35 +1,712 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>مدير الكوفي</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:#f4f6f8;color:#17202a}.wrap{max-width:920px;margin:auto;padding:18px}.card{background:#fff;border-radius:20px;padding:18px;box-shadow:0 8px 30px #00000010;margin:14px 0}h1,h2{margin:0}.muted{color:#6b7280;font-size:13px}.hidden{display:none}.top,.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}button,input{font:inherit}button{border:0;border-radius:12px;padding:11px 14px;font-weight:800;cursor:pointer}.primary{background:#111827;color:#fff}.danger{background:#fee2e2;color:#991b1b}.success{background:#dcfce7;color:#166534}.secondary{background:#eef2ff;color:#3730a3}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat{background:#f8fafc;border:1px solid #eef2f7;border-radius:16px;padding:13px;text-align:center}.stat b{display:block;font-size:20px;margin-top:4px}.green{color:#166534}.orange{color:#9a3412}.red{color:#991b1b}.form{display:grid;grid-template-columns:2fr 1fr 2fr auto;gap:8px;margin-top:12px}.form input{min-width:0;border:1px solid #d1d5db;border-radius:12px;padding:11px}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.product{border:1px solid #e5e7eb;border-radius:16px;padding:12px}.product img{width:100%;aspect-ratio:1.6;object-fit:cover;border-radius:12px;background:#f3f4f6}.pname{font-weight:900;margin-top:8px}.sale,.deviceReq{border-top:1px solid #eef0f2;padding:11px 0}.sale:first-child,.deviceReq:first-child{border-top:0}.saleBtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.saleBtns button{padding:8px 10px;font-size:12px}.login input{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:13px;margin:10px 0}.err{color:#b91c1c;font-size:14px;margin-top:8px}.small{font-size:12px;color:#9ca3af;margin:18px 0}.pill{padding:6px 10px;border-radius:999px;background:#f3f4f6;font-size:12px;font-weight:800}.deviceBox{margin-top:12px;padding:14px;border-radius:16px;background:#f8fafc;border:1px solid #eef2f7}@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.products{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr 1fr}.form input:nth-child(3){grid-column:1/-1}.form button{grid-column:1/-1}.wrap{padding:12px}}@media(max-width:420px){.products{grid-template-columns:1fr 1fr}.stat b{font-size:17px}}
-</style></head><body><main class="wrap"><div class="top"><div><h1>إدارة الكوفي</h1><div id="cafeTitle" class="muted">الدخول برمز المدير</div></div><button id="logout" class="danger hidden">خروج</button></div>
-<section id="login" class="card login"><b>رمز مدير الكوفي</b><input id="code" inputmode="numeric" maxlength="6" placeholder="أدخل الرمز المكوّن من 6 أرقام"><button id="enter" class="primary" style="width:100%">دخول</button><div id="err" class="err"></div></section>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>مدير الكوفي</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:#f4f6f8;color:#17202a}
+.wrap{max-width:920px;margin:auto;padding:18px}
+.card{background:#fff;border-radius:20px;padding:18px;box-shadow:0 8px 30px #00000010;margin:14px 0}
+h1,h2{margin:0}
+.muted{color:#6b7280;font-size:13px}
+.hidden{display:none}
+.top,.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+button,input{font:inherit}
+button{border:0;border-radius:12px;padding:11px 14px;font-weight:800;cursor:pointer}
+.primary{background:#111827;color:#fff}
+.danger{background:#fee2e2;color:#991b1b}
+.success{background:#dcfce7;color:#166534}
+.secondary{background:#eef2ff;color:#3730a3}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.stat{background:#f8fafc;border:1px solid #eef2f7;border-radius:16px;padding:13px;text-align:center}
+.stat b{display:block;font-size:20px;margin-top:4px}
+.green{color:#166534}
+.orange{color:#9a3412}
+.red{color:#991b1b}
+.form{display:grid;grid-template-columns:2fr 1fr 2fr auto;gap:8px;margin-top:12px}
+.form input,.dateInput{min-width:0;border:1px solid #d1d5db;border-radius:12px;padding:11px;background:#fff}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.product{border:1px solid #e5e7eb;border-radius:16px;padding:12px}
+.product img{width:100%;aspect-ratio:1.6;object-fit:cover;border-radius:12px;background:#f3f4f6}
+.pname{font-weight:900;margin-top:8px}
+.sale,.deviceReq{border-top:1px solid #eef0f2;padding:11px 0}
+.sale:first-child,.deviceReq:first-child{border-top:0}
+.saleBtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.saleBtns button{padding:8px 10px;font-size:12px}
+.login input{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:13px;margin:10px 0}
+.err{color:#b91c1c;font-size:14px;margin-top:8px}
+.small{font-size:12px;color:#9ca3af;margin:18px 0}
+.pill{padding:6px 10px;border-radius:999px;background:#f3f4f6;font-size:12px;font-weight:800}
+.deviceBox{margin-top:12px;padding:14px;border-radius:16px;background:#f8fafc;border:1px solid #eef2f7}
+
+.reportWrap{overflow-x:auto;margin-top:12px}
+.reportTable{width:100%;border-collapse:collapse;min-width:780px}
+.reportTable th,.reportTable td{padding:10px 8px;text-align:center;border-bottom:1px solid #eef2f7;font-size:13px}
+.reportTable th{background:#f8fafc;font-weight:900}
+.reportTable td:first-child,.reportTable th:first-child{text-align:right;font-weight:900}
+
+@media(max-width:700px){
+.grid{grid-template-columns:repeat(2,1fr)}
+.products{grid-template-columns:repeat(2,1fr)}
+.form{grid-template-columns:1fr 1fr}
+.form input:nth-child(3){grid-column:1/-1}
+.form button{grid-column:1/-1}
+.wrap{padding:12px}
+}
+@media(max-width:420px){
+.products{grid-template-columns:1fr 1fr}
+.stat b{font-size:17px}
+}
+</style>
+</head>
+
+<body>
+<main class="wrap">
+
+<div class="top">
+<div>
+<h1>إدارة الكوفي</h1>
+<div id="cafeTitle" class="muted">الدخول برمز المدير</div>
+</div>
+<button id="logout" class="danger hidden">خروج</button>
+</div>
+
+<section id="login" class="card login">
+<b>رمز مدير الكوفي</b>
+<input id="code" inputmode="numeric" maxlength="6" placeholder="أدخل الرمز المكوّن من 6 أرقام">
+<button id="enter" class="primary" style="width:100%">دخول</button>
+<div id="err" class="err"></div>
+</section>
+
 <section id="panel" class="hidden">
-<div class="card"><div class="row"><b>ملخص اليوم</b><span id="todayLabel" class="pill"></span></div><div class="grid" style="margin-top:12px"><div class="stat"><span class="muted">النازل</span><b id="downCount">0</b></div><div class="stat"><span class="muted">الواصل</span><b id="paidCount" class="green">0</b></div><div class="stat"><span class="muted">الباقي</span><b id="remainCount" class="orange">0</b></div><div class="stat"><span class="muted">المبلغ الواصل</span><b id="paidMoney" class="green">0 د.ع</b></div><div class="stat"><span class="muted">قيمة الباقي</span><b id="remainMoney" class="orange">0 د.ع</b></div><div class="stat"><span class="muted">الضيافة</span><b id="giftCount">0</b></div><div class="stat"><span class="muted">الإلغاء</span><b id="cancelCount" class="red">0</b></div><div class="stat"><span class="muted">إجمالي النازل</span><b id="downMoney">0 د.ع</b></div></div></div>
-<div class="card"><div class="row"><div><b>جهاز الموظفين</b><div class="muted">يسمح بجهاز واحد فقط. عند تبديله ألغِ الجهاز الحالي ثم وافق على الجهاز الجديد.</div></div><span id="deviceState" class="pill">جارٍ التحقق...</span></div><div id="approvedDevice" class="deviceBox"></div><div id="deviceRequests" style="margin-top:8px"></div></div>
-<div class="card"><div class="row"><div><b>إدارة المنتجات</b><div class="muted">أضف الاسم والسعر ورابط الصورة. تظهر مباشرة عند الموظفين.</div></div></div><div class="form"><input id="pname" placeholder="اسم المنتج"><input id="pprice" inputmode="numeric" placeholder="السعر"><input id="pimage" placeholder="رابط الصورة (اختياري)"><button id="addProduct" class="primary">إضافة المنتج</button></div><div id="products" class="products"></div></div>
-<div class="card"><div class="row"><div><b>حركات اليوم</b><div class="muted">كل ضغطة من جهاز الموظفين المعتمد تظهر هنا مباشرة.</div></div><button id="clearClosed" class="danger">حذف الملغي فقط</button></div><div id="sales" style="margin-top:8px"></div></div>
-</section><div class="small">Coffee Counter • Manager</div></main>
+
+<div class="card">
+<div class="row">
+<div>
+<b>التقرير اليومي</b>
+<div class="muted">اختر اليوم الذي تريد عرض تقريره</div>
+</div>
+<input id="reportDate" class="dateInput" type="date">
+</div>
+
+<div class="grid" style="margin-top:12px">
+<div class="stat"><span class="muted">النازل</span><b id="downCount">0</b></div>
+<div class="stat"><span class="muted">الواصل</span><b id="paidCount" class="green">0</b></div>
+<div class="stat"><span class="muted">الباقي</span><b id="remainCount" class="orange">0</b></div>
+<div class="stat"><span class="muted">المبلغ الواصل</span><b id="paidMoney" class="green">0 د.ع</b></div>
+<div class="stat"><span class="muted">قيمة الباقي</span><b id="remainMoney" class="orange">0 د.ع</b></div>
+<div class="stat"><span class="muted">الضيافة</span><b id="giftCount">0</b></div>
+<div class="stat"><span class="muted">الإلغاء</span><b id="cancelCount" class="red">0</b></div>
+<div class="stat"><span class="muted">إجمالي النازل</span><b id="downMoney">0 د.ع</b></div>
+</div>
+</div>
+
+<div class="card">
+<div class="row">
+<div>
+<b>تقرير المنتجات</b>
+<div class="muted">تفاصيل حركة كل منتج في اليوم المحدد</div>
+</div>
+<span id="reportLabel" class="pill"></span>
+</div>
+
+<div class="reportWrap">
+<table class="reportTable">
+<thead>
+<tr>
+<th>المنتج</th>
+<th>النازل</th>
+<th>الواصل</th>
+<th>الباقي</th>
+<th>الضيافة</th>
+<th>الإلغاء</th>
+<th>إجمالي النازل</th>
+<th>المبلغ الواصل</th>
+<th>قيمة الباقي</th>
+</tr>
+</thead>
+<tbody id="productReport"></tbody>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="row">
+<div>
+<b>جهاز الموظفين</b>
+<div class="muted">يسمح بجهاز واحد فقط. عند تبديله ألغِ الجهاز الحالي ثم وافق على الجهاز الجديد.</div>
+</div>
+<span id="deviceState" class="pill">جارٍ التحقق...</span>
+</div>
+<div id="approvedDevice" class="deviceBox"></div>
+<div id="deviceRequests" style="margin-top:8px"></div>
+</div>
+
+<div class="card">
+<div class="row">
+<div>
+<b>إدارة المنتجات</b>
+<div class="muted">أضف الاسم والسعر ورابط الصورة. تظهر مباشرة عند الموظفين.</div>
+</div>
+</div>
+
+<div class="form">
+<input id="pname" placeholder="اسم المنتج">
+<input id="pprice" inputmode="numeric" placeholder="السعر">
+<input id="pimage" placeholder="رابط الصورة (اختياري)">
+<button id="addProduct" class="primary">إضافة المنتج</button>
+</div>
+
+<div id="products" class="products"></div>
+</div>
+
+<div class="card">
+<div class="row">
+<div>
+<b>حركات اليوم المحدد</b>
+<div class="muted">يمكنك مشاهدة وتعديل حالة الحركات حسب التاريخ المختار.</div>
+</div>
+<button id="clearClosed" class="danger">حذف الملغي فقط</button>
+</div>
+<div id="sales" style="margin-top:8px"></div>
+</div>
+
+</section>
+
+<div class="small">Coffee Counter • Manager</div>
+</main>
+
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
 import {getAuth,signInAnonymously,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
 import {getDatabase,ref,get,set,onValue,push,update,remove} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js';
-const config={apiKey:'AIzaSyBtXll7UcG6PrpQBZwRnewxgR9UmyqEp_s',authDomain:'coffee-counter-eb907.firebaseapp.com',databaseURL:'https://coffee-counter-eb907-default-rtdb.europe-west1.firebasedatabase.app',projectId:'coffee-counter-eb907',storageBucket:'coffee-counter-eb907.firebasestorage.app',messagingSenderId:'730169265694',appId:'1:730169265694:web:0172883b33e95e44d4a80f'};
-const app=initializeApp(config),auth=getAuth(app),db=getDatabase(app),$=id=>document.getElementById(id);let cafeId=null,currentCafe=null,salesCache={},approvedDevice=null;
-const dayKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
-$('todayLabel').textContent=new Date().toLocaleDateString('ar-IQ');
-$('enter').onclick=async()=>{const code=$('code').value.trim();$('err').textContent='';if(!/^\d{6}$/.test(code)){ $('err').textContent='أدخل رمزًا من 6 أرقام.';return }try{if(!auth.currentUser)await signInAnonymously(auth);const access=(await get(ref(db,'accessCodes/'+code))).val();if(!access||access.active!==true||access.role!=='manager')throw new Error('bad');cafeId=access.cafeId;await set(ref(db,'sessions/'+auth.currentUser.uid),{code,cafeId,role:'manager',createdAt:Date.now()});const cafe=(await get(ref(db,'cafes/'+cafeId))).val();if(!cafe||cafe.active!==true)throw new Error('inactive');sessionStorage.setItem('managerCode',code);openPanel(cafe)}catch(e){$('err').textContent=e.message==='inactive'?'النظام موقوف من مالك النظام.':'رمز الدخول غير صحيح أو غير مفعل.'}};
-$('logout').onclick=async()=>{sessionStorage.removeItem('managerCode');await signOut(auth);location.reload()};
-function openPanel(cafe){currentCafe=cafe;$('login').classList.add('hidden');$('panel').classList.remove('hidden');$('logout').classList.remove('hidden');$('cafeTitle').textContent=(cafe.name||'الكوفي')+(cafe.managerName?' • '+cafe.managerName:'');listenDevice();listenProducts();listenSales()}
-function listenDevice(){onValue(ref(db,`cafes/${cafeId}/staffDevice`),s=>{approvedDevice=s.val()||null;renderApprovedDevice()});onValue(ref(db,`cafes/${cafeId}/deviceRequests`),s=>renderDeviceRequests(s.val()||{}))}
-function renderApprovedDevice(){const box=$('approvedDevice');if(approvedDevice?.uid){$('deviceState').textContent='جهاز معتمد';box.innerHTML=`<div class="row"><div><b>الجهاز الحالي</b><div class="muted">تم اعتماده ${approvedDevice.approvedAt?new Date(approvedDevice.approvedAt).toLocaleString('ar-IQ'):''}</div></div><button id="revokeDevice" class="danger">إلغاء اعتماد الجهاز</button></div>`;$('revokeDevice').onclick=async()=>{if(!confirm('إلغاء اعتماد جهاز الموظفين الحالي؟ سيتوقف عن تسجيل الطلبات.'))return;await remove(ref(db,`cafes/${cafeId}/staffDevice`))}}else{$('deviceState').textContent='لا يوجد جهاز';box.innerHTML='<div class="muted">افتح واجهة الموظفين من الهاتف المطلوب وأدخل رمز الموظفين، ثم سيظهر طلب الاعتماد هنا.</div>'}}
-function renderDeviceRequests(data){const box=$('deviceRequests');box.innerHTML='';const arr=Object.entries(data).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));if(!arr.length){box.innerHTML='<div class="muted">لا توجد طلبات اعتماد جديدة.</div>';return}arr.forEach(([uid,r])=>{const el=document.createElement('div');el.className='deviceReq';el.innerHTML=`<div class="row"><div><b>طلب جهاز جديد</b><div class="muted">${esc(r.label||'هاتف الموظفين')} • ${new Date(r.createdAt||Date.now()).toLocaleString('ar-IQ')}</div></div><div class="saleBtns"><button class="success approve">اعتماد هذا الجهاز</button><button class="danger reject">رفض</button></div></div>`;el.querySelector('.approve').onclick=async()=>{if(approvedDevice?.uid&&!confirm('يوجد جهاز معتمد حاليًا. هل تريد استبداله بهذا الجهاز؟'))return;await set(ref(db,`cafes/${cafeId}/staffDevice`),{uid,approvedAt:Date.now(),label:r.label||'هاتف الموظفين'});for(const [id] of arr)await remove(ref(db,`cafes/${cafeId}/deviceRequests/${id}`))};el.querySelector('.reject').onclick=()=>remove(ref(db,`cafes/${cafeId}/deviceRequests/${uid}`));box.appendChild(el)})}
-function listenProducts(){onValue(ref(db,`cafes/${cafeId}/products`),s=>renderProducts(s.val()||{}))}
-function renderProducts(data){const box=$('products');box.innerHTML='';Object.entries(data).forEach(([id,p])=>{const el=document.createElement('div');el.className='product';el.innerHTML=`${p.image?`<img src="${escAttr(p.image)}" onerror="this.style.display='none'">`:''}<div class="pname">${esc(p.name||'منتج')}</div><div class="muted">${money(p.price||0)}</div><div class="saleBtns"><button class="secondary edit">تعديل</button><button class="danger del">حذف</button></div>`;el.querySelector('.edit').onclick=async()=>{const name=prompt('اسم المنتج',p.name||'');if(name===null)return;const price=prompt('السعر',p.price||0);if(price===null)return;await update(ref(db,`cafes/${cafeId}/products/${id}`),{name:name.trim(),price:Number(price)||0})};el.querySelector('.del').onclick=()=>confirm('حذف المنتج؟')&&remove(ref(db,`cafes/${cafeId}/products/${id}`));box.appendChild(el)});if(!Object.keys(data).length)box.innerHTML='<div class="muted">لا توجد منتجات بعد.</div>'}
-$('addProduct').onclick=async()=>{const name=$('pname').value.trim(),price=Number($('pprice').value),image=$('pimage').value.trim();if(!name||!price){alert('اكتب اسم المنتج والسعر.');return}await push(ref(db,`cafes/${cafeId}/products`),{name,price,image,active:true,createdAt:Date.now()});$('pname').value='';$('pprice').value='';$('pimage').value=''};
-function listenSales(){onValue(ref(db,`cafes/${cafeId}/sales/${dayKey()}`),s=>{salesCache=s.val()||{};renderSales(salesCache);renderSummary(salesCache)})}
-function renderSummary(data){let down=0,paid=0,gift=0,cancel=0,downMoney=0,paidMoney=0;Object.values(data).forEach(x=>{if(x.status==='cancelled'){cancel++;return}down++;downMoney+=Number(x.price)||0;if(x.status==='paid'){paid++;paidMoney+=Number(x.price)||0}else if(x.status==='gift')gift++});const remain=Math.max(0,down-paid-gift);$('downCount').textContent=down;$('paidCount').textContent=paid;$('remainCount').textContent=remain;$('giftCount').textContent=gift;$('cancelCount').textContent=cancel;$('downMoney').textContent=money(downMoney);$('paidMoney').textContent=money(paidMoney);$('remainMoney').textContent=money(Math.max(0,downMoney-paidMoney-Object.values(data).filter(x=>x.status==='gift').reduce((a,x)=>a+(Number(x.price)||0),0)))}
-function renderSales(data){const box=$('sales');box.innerHTML='';const arr=Object.entries(data).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));arr.forEach(([id,s])=>{const st=s.status||'pending';const label=st==='paid'?'واصل':st==='gift'?'ضيافة':st==='cancelled'?'ملغي':'باقي';const el=document.createElement('div');el.className='sale';el.innerHTML=`<div class="row"><div><b>${esc(s.productName||'منتج')}</b><div class="muted">${money(s.price||0)} • ${new Date(s.createdAt||Date.now()).toLocaleTimeString('ar-IQ',{hour:'2-digit',minute:'2-digit'})}</div></div><span class="pill">${label}</span></div><div class="saleBtns"><button class="success paid">واصل</button><button class="secondary gift">ضيافة</button><button class="danger cancel">إلغاء</button></div>`;el.querySelector('.paid').onclick=()=>update(ref(db,`cafes/${cafeId}/sales/${dayKey()}/${id}`),{status:'paid',updatedAt:Date.now()});el.querySelector('.gift').onclick=()=>update(ref(db,`cafes/${cafeId}/sales/${dayKey()}/${id}`),{status:'gift',updatedAt:Date.now()});el.querySelector('.cancel').onclick=()=>update(ref(db,`cafes/${cafeId}/sales/${dayKey()}/${id}`),{status:'cancelled',updatedAt:Date.now()});box.appendChild(el)});if(!arr.length)box.innerHTML='<div class="muted">لا توجد حركات اليوم.</div>'}
-$('clearClosed').onclick=async()=>{if(!confirm('حذف الحركات الملغاة فقط؟'))return;for(const [id,s] of Object.entries(salesCache))if(s.status==='cancelled')await remove(ref(db,`cafes/${cafeId}/sales/${dayKey()}/${id}`))};
-onAuthStateChanged(auth,async user=>{const code=sessionStorage.getItem('managerCode');if(user&&code){try{const a=(await get(ref(db,'accessCodes/'+code))).val();if(a&&a.role==='manager'&&a.active){cafeId=a.cafeId;await set(ref(db,'sessions/'+user.uid),{code,cafeId,role:'manager',createdAt:Date.now()});const c=(await get(ref(db,'cafes/'+cafeId))).val();if(c?.active)openPanel(c)}}catch(e){}}});
-function money(n){return (Number(n)||0).toLocaleString('ar-IQ')+' د.ع'}function esc(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}function escAttr(s){return esc(s)}
-</script></body></html>
+
+const config={
+apiKey:'AIzaSyBtXll7UcG6PrpQBZwRnewxgR9UmyqEp_s',
+authDomain:'coffee-counter-eb907.firebaseapp.com',
+databaseURL:'https://coffee-counter-eb907-default-rtdb.europe-west1.firebasedatabase.app',
+projectId:'coffee-counter-eb907',
+storageBucket:'coffee-counter-eb907.firebasestorage.app',
+messagingSenderId:'730169265694',
+appId:'1:730169265694:web:0172883b33e95e44d4a80f'
+};
+
+const app=initializeApp(config);
+const auth=getAuth(app);
+const db=getDatabase(app);
+const $=id=>document.getElementById(id);
+
+let cafeId=null;
+let currentCafe=null;
+let salesCache={};
+let approvedDevice=null;
+let stopSales=null;
+
+const dayKey=()=>{
+const d=new Date();
+return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+};
+
+const selectedDay=()=> $('reportDate').value || dayKey();
+
+$('reportDate').value=dayKey();
+
+function updateDateLabel(){
+const d=$('reportDate').value;
+$('reportLabel').textContent=d||dayKey();
+}
+
+updateDateLabel();
+
+$('reportDate').onchange=()=>{
+updateDateLabel();
+if(cafeId)listenSales();
+};
+
+$('enter').onclick=async()=>{
+const code=$('code').value.trim();
+$('err').textContent='';
+
+if(!/^\d{6}$/.test(code)){
+$('err').textContent='أدخل رمزًا من 6 أرقام.';
+return;
+}
+
+try{
+if(!auth.currentUser)await signInAnonymously(auth);
+
+const access=(await get(ref(db,'accessCodes/'+code))).val();
+
+if(!access||access.active!==true||access.role!=='manager')
+throw new Error('bad');
+
+cafeId=access.cafeId;
+
+await set(ref(db,'sessions/'+auth.currentUser.uid),{
+code,
+cafeId,
+role:'manager',
+createdAt:Date.now()
+});
+
+const cafe=(await get(ref(db,'cafes/'+cafeId))).val();
+
+if(!cafe||cafe.active!==true)
+throw new Error('inactive');
+
+sessionStorage.setItem('managerCode',code);
+openPanel(cafe);
+
+}catch(e){
+$('err').textContent=e.message==='inactive'
+?'النظام موقوف من مالك النظام.'
+:'رمز الدخول غير صحيح أو غير مفعل.';
+}
+};
+
+$('logout').onclick=async()=>{
+sessionStorage.removeItem('managerCode');
+if(stopSales)stopSales();
+await signOut(auth);
+location.reload();
+};
+
+function openPanel(cafe){
+currentCafe=cafe;
+$('login').classList.add('hidden');
+$('panel').classList.remove('hidden');
+$('logout').classList.remove('hidden');
+
+$('cafeTitle').textContent=
+(cafe.name||'الكوفي')+
+(cafe.managerName?' • '+cafe.managerName:'');
+
+listenDevice();
+listenProducts();
+listenSales();
+}
+
+function listenDevice(){
+onValue(ref(db,`cafes/${cafeId}/staffDevice`),s=>{
+approvedDevice=s.val()||null;
+renderApprovedDevice();
+});
+
+onValue(ref(db,`cafes/${cafeId}/deviceRequests`),s=>{
+renderDeviceRequests(s.val()||{});
+});
+}
+
+function renderApprovedDevice(){
+const box=$('approvedDevice');
+
+if(approvedDevice?.uid){
+$('deviceState').textContent='جهاز معتمد';
+
+box.innerHTML=`
+<div class="row">
+<div>
+<b>الجهاز الحالي</b>
+<div class="muted">
+تم اعتماده ${approvedDevice.approvedAt?new Date(approvedDevice.approvedAt).toLocaleString('ar-IQ'):''}
+</div>
+</div>
+<button id="revokeDevice" class="danger">إلغاء اعتماد الجهاز</button>
+</div>`;
+
+$('revokeDevice').onclick=async()=>{
+if(!confirm('إلغاء اعتماد جهاز الموظفين الحالي؟ سيتوقف عن تسجيل الطلبات.'))return;
+await remove(ref(db,`cafes/${cafeId}/staffDevice`));
+};
+
+}else{
+$('deviceState').textContent='لا يوجد جهاز';
+box.innerHTML='<div class="muted">افتح واجهة الموظفين من الهاتف المطلوب وأدخل رمز الموظفين، ثم سيظهر طلب الاعتماد هنا.</div>';
+}
+}
+
+function renderDeviceRequests(data){
+const box=$('deviceRequests');
+box.innerHTML='';
+
+const arr=Object.entries(data)
+.sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+
+if(!arr.length){
+box.innerHTML='<div class="muted">لا توجد طلبات اعتماد جديدة.</div>';
+return;
+}
+
+arr.forEach(([uid,r])=>{
+const el=document.createElement('div');
+el.className='deviceReq';
+
+el.innerHTML=`
+<div class="row">
+<div>
+<b>طلب جهاز جديد</b>
+<div class="muted">
+${esc(r.label||'هاتف الموظفين')} •
+${new Date(r.createdAt||Date.now()).toLocaleString('ar-IQ')}
+</div>
+</div>
+
+<div class="saleBtns">
+<button class="success approve">اعتماد هذا الجهاز</button>
+<button class="danger reject">رفض</button>
+</div>
+</div>`;
+
+el.querySelector('.approve').onclick=async()=>{
+if(approvedDevice?.uid&&!confirm('يوجد جهاز معتمد حاليًا. هل تريد استبداله بهذا الجهاز؟'))return;
+
+await set(ref(db,`cafes/${cafeId}/staffDevice`),{
+uid,
+approvedAt:Date.now(),
+label:r.label||'هاتف الموظفين'
+});
+
+for(const [id] of arr){
+await remove(ref(db,`cafes/${cafeId}/deviceRequests/${id}`));
+}
+};
+
+el.querySelector('.reject').onclick=()=>{
+remove(ref(db,`cafes/${cafeId}/deviceRequests/${uid}`));
+};
+
+box.appendChild(el);
+});
+}
+
+function listenProducts(){
+onValue(ref(db,`cafes/${cafeId}/products`),s=>{
+renderProducts(s.val()||{});
+});
+}
+
+function renderProducts(data){
+const box=$('products');
+box.innerHTML='';
+
+Object.entries(data).forEach(([id,p])=>{
+const el=document.createElement('div');
+el.className='product';
+
+el.innerHTML=`
+${p.image?`<img src="${escAttr(p.image)}" onerror="this.style.display='none'">`:''}
+<div class="pname">${esc(p.name||'منتج')}</div>
+<div class="muted">${money(p.price||0)}</div>
+
+<div class="saleBtns">
+<button class="secondary edit">تعديل</button>
+<button class="danger del">حذف</button>
+</div>`;
+
+el.querySelector('.edit').onclick=async()=>{
+const name=prompt('اسم المنتج',p.name||'');
+if(name===null)return;
+
+const price=prompt('السعر',p.price||0);
+if(price===null)return;
+
+await update(ref(db,`cafes/${cafeId}/products/${id}`),{
+name:name.trim(),
+price:Number(price)||0
+});
+};
+
+el.querySelector('.del').onclick=()=>{
+confirm('حذف المنتج؟')&&
+remove(ref(db,`cafes/${cafeId}/products/${id}`));
+};
+
+box.appendChild(el);
+});
+
+if(!Object.keys(data).length)
+box.innerHTML='<div class="muted">لا توجد منتجات بعد.</div>';
+}
+
+$('addProduct').onclick=async()=>{
+const name=$('pname').value.trim();
+const price=Number($('pprice').value);
+const image=$('pimage').value.trim();
+
+if(!name||!price){
+alert('اكتب اسم المنتج والسعر.');
+return;
+}
+
+await push(ref(db,`cafes/${cafeId}/products`),{
+name,
+price,
+image,
+active:true,
+createdAt:Date.now()
+});
+
+$('pname').value='';
+$('pprice').value='';
+$('pimage').value='';
+};
+
+function listenSales(){
+if(stopSales){
+stopSales();
+stopSales=null;
+}
+
+const date=selectedDay();
+
+stopSales=onValue(
+ref(db,`cafes/${cafeId}/sales/${date}`),
+s=>{
+salesCache=s.val()||{};
+renderSales(salesCache);
+renderSummary(salesCache);
+renderProductReport(salesCache);
+}
+);
+}
+
+function renderSummary(data){
+let down=0;
+let paid=0;
+let gift=0;
+let cancel=0;
+let downMoney=0;
+let paidMoney=0;
+let remainMoney=0;
+
+Object.values(data).forEach(x=>{
+const price=Number(x.price)||0;
+
+if(x.status==='cancelled'){
+cancel++;
+return;
+}
+
+down++;
+downMoney+=price;
+
+if(x.status==='paid'){
+paid++;
+paidMoney+=price;
+}else if(x.status==='gift'){
+gift++;
+}else{
+remainMoney+=price;
+}
+});
+
+const remain=Math.max(0,down-paid-gift);
+
+$('downCount').textContent=down;
+$('paidCount').textContent=paid;
+$('remainCount').textContent=remain;
+$('giftCount').textContent=gift;
+$('cancelCount').textContent=cancel;
+$('downMoney').textContent=money(downMoney);
+$('paidMoney').textContent=money(paidMoney);
+$('remainMoney').textContent=money(remainMoney);
+}
+
+function renderProductReport(data){
+const box=$('productReport');
+box.innerHTML='';
+
+const groups={};
+
+Object.values(data).forEach(s=>{
+const key=s.productId||s.productName||'unknown';
+
+if(!groups[key]){
+groups[key]={
+name:s.productName||'منتج',
+down:0,
+paid:0,
+remain:0,
+gift:0,
+cancel:0,
+downMoney:0,
+paidMoney:0,
+remainMoney:0
+};
+}
+
+const g=groups[key];
+const price=Number(s.price)||0;
+
+if(s.status==='cancelled'){
+g.cancel++;
+return;
+}
+
+g.down++;
+g.downMoney+=price;
+
+if(s.status==='paid'){
+g.paid++;
+g.paidMoney+=price;
+}else if(s.status==='gift'){
+g.gift++;
+}else{
+g.remain++;
+g.remainMoney+=price;
+}
+});
+
+const arr=Object.values(groups)
+.sort((a,b)=>b.downMoney-a.downMoney);
+
+if(!arr.length){
+box.innerHTML='<tr><td colspan="9" class="muted">لا توجد حركات في هذا اليوم.</td></tr>';
+return;
+}
+
+arr.forEach(g=>{
+const tr=document.createElement('tr');
+
+tr.innerHTML=`
+<td>${esc(g.name)}</td>
+<td>${g.down}</td>
+<td class="green">${g.paid}</td>
+<td class="orange">${g.remain}</td>
+<td>${g.gift}</td>
+<td class="red">${g.cancel}</td>
+<td>${money(g.downMoney)}</td>
+<td class="green">${money(g.paidMoney)}</td>
+<td class="orange">${money(g.remainMoney)}</td>`;
+
+box.appendChild(tr);
+});
+}
+
+function renderSales(data){
+const box=$('sales');
+box.innerHTML='';
+
+const arr=Object.entries(data)
+.sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+
+arr.forEach(([id,s])=>{
+const st=s.status||'pending';
+
+const label=
+st==='paid'?'واصل':
+st==='gift'?'ضيافة':
+st==='cancelled'?'ملغي':'باقي';
+
+const el=document.createElement('div');
+el.className='sale';
+
+el.innerHTML=`
+<div class="row">
+<div>
+<b>${esc(s.productName||'منتج')}</b>
+<div class="muted">
+${money(s.price||0)} •
+${new Date(s.createdAt||Date.now()).toLocaleTimeString('ar-IQ',{
+hour:'2-digit',
+minute:'2-digit'
+})}
+</div>
+</div>
+<span class="pill">${label}</span>
+</div>
+
+<div class="saleBtns">
+<button class="success paid">واصل</button>
+<button class="secondary gift">ضيافة</button>
+<button class="danger cancel">إلغاء</button>
+</div>`;
+
+el.querySelector('.paid').onclick=()=>{
+update(
+ref(db,`cafes/${cafeId}/sales/${selectedDay()}/${id}`),
+{status:'paid',updatedAt:Date.now()}
+);
+};
+
+el.querySelector('.gift').onclick=()=>{
+update(
+ref(db,`cafes/${cafeId}/sales/${selectedDay()}/${id}`),
+{status:'gift',updatedAt:Date.now()}
+);
+};
+
+el.querySelector('.cancel').onclick=()=>{
+update(
+ref(db,`cafes/${cafeId}/sales/${selectedDay()}/${id}`),
+{status:'cancelled',updatedAt:Date.now()}
+);
+};
+
+box.appendChild(el);
+});
+
+if(!arr.length){
+box.innerHTML='<div class="muted">لا توجد حركات في هذا اليوم.</div>';
+}
+}
+
+$('clearClosed').onclick=async()=>{
+if(!confirm('حذف الحركات الملغاة فقط من اليوم المحدد؟'))return;
+
+for(const [id,s] of Object.entries(salesCache)){
+if(s.status==='cancelled'){
+await remove(
+ref(db,`cafes/${cafeId}/sales/${selectedDay()}/${id}`)
+);
+}
+}
+};
+
+onAuthStateChanged(auth,async user=>{
+const code=sessionStorage.getItem('managerCode');
+
+if(user&&code){
+try{
+const a=(await get(ref(db,'accessCodes/'+code))).val();
+
+if(a&&a.role==='manager'&&a.active){
+cafeId=a.cafeId;
+
+await set(ref(db,'sessions/'+user.uid),{
+code,
+cafeId,
+role:'manager',
+createdAt:Date.now()
+});
+
+const c=(await get(ref(db,'cafes/'+cafeId))).val();
+
+if(c?.active)openPanel(c);
+}
+}catch(e){}
+}
+});
+
+function money(n){
+return (Number(n)||0).toLocaleString('ar-IQ')+' د.ع';
+}
+
+function esc(s){
+return String(s).replace(/[&<>'"]/g,c=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+"'":'&#39;',
+'"':'&quot;'
+}[c]));
+}
+
+function escAttr(s){
+return esc(s);
+}
+</script>
+</body>
+</html>
