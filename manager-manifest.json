@@ -2,7 +2,7 @@
   "id": "/coffee-counter/manager.html",
   "name": "كوفي السلام - الإدارة",
   "short_name": "كوفي السلام",
-  "start_url": "/coffee-counter/manager.html?v=20260907-stable",
+  "start_url": "/coffee-counter/manager.html?v=20260908-manager2",
   "scope": "/coffee-counter/",
   "display": "standalone",
   "background_color": "#f3f5f7",
